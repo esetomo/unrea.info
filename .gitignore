@@ -1,0 +1,12 @@
+.~*
+log
+*~
+db/schema.rb
+\#*
+.#*
+\._*
+\.DS_Store
+notfound.txt
+public/system
+tmp
+db/*.sqlite3
