@@ -1,0 +1,3 @@
+class Twitter::Status < ActiveResource::Base
+  include Twitter
+end

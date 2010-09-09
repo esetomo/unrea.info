@@ -28,3 +28,6 @@ gem 'pg'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem 'multipart-post'
+gem 'oauth-active-resource'

@@ -1,0 +1,23 @@
+require 'oauth_active_resource'
+
+module Twitter
+  def self.table_name_prefix
+    'twitter_'
+  end
+
+  def self.site
+    'http://api.twitter.com'
+  end
+
+  def self.prefix
+    '/1/'
+  end
+
+  def self.consumer_key
+    'VW0bNP19ZFhA5k1tW3RhA'
+  end
+
+  def self.consumer_secret
+    'HSrt4RcTESzW0Z2XPVS2N7tWoznmB9aT96jBTjCrsI'
+  end
+end
