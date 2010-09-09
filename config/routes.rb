@@ -1,4 +1,11 @@
 Unrea::Application.routes.draw do
+  resource :oauth do
+    member do
+      get 'verify'
+      get 'callback'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
