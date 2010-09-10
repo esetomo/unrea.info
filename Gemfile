@@ -29,5 +29,4 @@ gem 'pg'
 #   gem 'webrat'
 # end
 
-gem 'multipart-post'
-gem 'oauth-active-resource'
+gem 'twitter'
