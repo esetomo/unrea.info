@@ -12,9 +12,8 @@ gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branc
 gem 'bson_ext'
 gem 'mongo'
 
-gem 'twitter'
 gem 'haml'
-gem 'sass'
+gem 'haml-rails'
 
 group :development do
   gem "rails-erd"
