@@ -1,16 +1,1 @@
-#home
-    .toolbar
-        %h1 Hello
-    %ul.rounded
-        %li.arrow 
-            %a{:href => "#page2"} Page2
-        %li.arrow Bar
-        %li.arrow Baz
-#page2
-    .toolbar
-        %h1 Page2
-        %a.button.back{:href => '#'} Back
-    %ul.rounded
-        %li AAA
-        %li BBB
-        %li CCC
+= button_to 'logout', user_path(current_user.id), :method => :delete

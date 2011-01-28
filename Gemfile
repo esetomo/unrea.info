@@ -16,7 +16,7 @@ gem 'haml-rails'
 
 gem 'authlogic'
 gem 'oauth'
-gem 'authlogic-oauth'
+gem 'authlogic-oauth', :require => 'authlogic_oauth'
 
 group :development do
   gem "rails-erd"
