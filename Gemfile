@@ -1,3 +1,4 @@
+# -*- mode:ruby; coding:utf-8 -*-
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
@@ -31,3 +32,4 @@ gem 'pg'
 
 gem 'twitter'
 gem 'haml'
+
