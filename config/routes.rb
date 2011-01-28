@@ -1,7 +1,9 @@
 Unrea::Application.routes.draw do
-  resource :account, :controller => "users"
-  resources :users
-  resource :user_session
+  resource :user_session do
+    member do
+      get 'create'
+    end
+  end
 
   resource :oauth do
     member do

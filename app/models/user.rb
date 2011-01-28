@@ -1,21 +1,10 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.login_field = :oauth_token
+    c.crypted_password_field = :oauth_secret
+  end
 
-  before_create :populate_oauth_user
-
-private
-
-  def populate_oauth_user
-    unless oauth_token.blank?
-      @response = UserSession.oauth_consumer.request(:get, '/account/verify_credentials.json',
-                                                     access_token, { :scheme => :query_string })
-      case @response
-      when Net::HTTPSuccess
-        user_info = JSON.parse(@response.body)
-        self.name = user_info['name']
-        self.twitter_uid = user_info['id']
-        self.avatar_url = user_info['profile_image_url']
-      end
-    end
+  def valid_password?(attempted_password)
+    raise
   end
 end

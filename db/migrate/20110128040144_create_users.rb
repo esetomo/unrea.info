@@ -1,10 +1,20 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
+      # Twitter
+      t.string :twitter_uid
+      t.string :name
+      t.string :screen_name
+      t.string :avatar_url
+      
+      # OAuth
+      t.string :oauth_token
+      t.string :oauth_secret
+
       # AuthLogic
-      t.string :login
-      t.string :crypted_password
-      t.string :password_salt
+      # t.string :login
+      # t.string :crypted_password
+      # t.string :password_salt
       t.string :persistence_token, :null => false
       t.string :single_access_token, :null => false
       t.string :perishable_token, :null => false
@@ -18,19 +28,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :current_login_ip
       t.string :last_login_ip
 
-      # OAuth
-      t.string :oauth_token
-      t.string :oauth_secret
-
-      # Twitter
-      t.string :name
-      t.string :twitter_uid
-      t.string :avatar_url
-      
       t.timestamps
     end
-
-    add_index :users, :oauth_token
   end
 
   def self.down

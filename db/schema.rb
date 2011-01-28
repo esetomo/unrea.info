@@ -13,9 +13,12 @@
 ActiveRecord::Schema.define(:version => 20110128040144) do
 
   create_table "users", :force => true do |t|
-    t.string   "login"
-    t.string   "crypted_password"
-    t.string   "password_salt"
+    t.string   "twitter_uid"
+    t.string   "name"
+    t.string   "screen_name"
+    t.string   "avatar_url"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
     t.string   "persistence_token",                  :null => false
     t.string   "single_access_token",                :null => false
     t.string   "perishable_token",                   :null => false
@@ -26,15 +29,8 @@ ActiveRecord::Schema.define(:version => 20110128040144) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.string   "oauth_token"
-    t.string   "oauth_secret"
-    t.string   "name"
-    t.string   "twitter_uid"
-    t.string   "avatar_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "users", ["oauth_token"], :name => "index_users_on_oauth_token"
 
 end
