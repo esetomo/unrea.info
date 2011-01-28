@@ -1,4 +1,6 @@
 Unrea::Application.routes.draw do
+  resource :account, :controller => "users"
+  resources :users
   resource :user_session
 
   resource :oauth do
