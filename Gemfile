@@ -20,8 +20,8 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", ">= 2.0.0.beta", :group => :development
-  gem "rspec-integration", ">= 2.0.0.beta"
+  gem "rspec-rails", :group => :development
+  gem "rspec-integration"
   gem "factory_girl_rails"
 
   gem "ZenTest"

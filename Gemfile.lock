@@ -166,7 +166,7 @@ DEPENDENCIES
   rails-erd
   rails3-generators
   redgreen
-  rspec-integration (>= 2.0.0.beta)
-  rspec-rails (>= 2.0.0.beta)
+  rspec-integration
+  rspec-rails
   webrat
   will_paginate!
