@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20110128040144) do
     t.string   "last_login_ip"
     t.string   "oauth_token"
     t.string   "oauth_secret"
+    t.string   "name"
+    t.string   "twitter_uid"
+    t.string   "avatar_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

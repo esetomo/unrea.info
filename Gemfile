@@ -7,13 +7,16 @@ gem 'pg'
 gem 'rails3-generators'
 gem 'jquery-rails'
 gem 'i18n_generators'
-gem 'authlogic'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'bson_ext'
 gem 'mongo'
 
 gem 'haml'
 gem 'haml-rails'
+
+gem 'authlogic'
+gem 'oauth'
+gem 'authlogic-oauth'
 
 group :development do
   gem "rails-erd"
@@ -32,5 +35,10 @@ group :development, :test do
  
   gem 'cucumber'
   gem 'cucumber-rails'
+end
+
+case RUBY_VERSION
+when /^1\.9/
+  gem 'test-unit', '1.2.3'
 end
 

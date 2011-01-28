@@ -1,2 +1,15 @@
 %h1 UserSessions#new
 %p Find me in app/views/user_sessions/new.html.haml
+= form_for @user_session do |f|
+  %p
+    = f.error_messages
+  %p
+    = f.label :login
+    = f.text_field :login
+  %p
+    = f.label :password
+    = f.password_field :password
+  %p
+    = f.submit :login
+    = raw(oauth_register_button :value => "Register with Twitter", :class => 'twitter')
+    = raw(oauth_login_button :value => "Login with Twitter", :class => 'twitter')
