@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20110128040144) do
     t.string   "avatar_url"
     t.string   "oauth_token"
     t.string   "oauth_secret"
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token",                  :null => false
     t.string   "single_access_token",                :null => false
     t.string   "perishable_token",                   :null => false
