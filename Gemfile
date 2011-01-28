@@ -30,3 +30,4 @@ gem 'pg'
 # end
 
 gem 'twitter'
+gem 'haml'
