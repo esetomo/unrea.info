@@ -19,14 +19,18 @@ group :development do
   gem "rails-erd"
 end
 
-group :test do
-  gem "rspec-rails", :group => :development
+group :development, :test do
+  gem "rspec"
+  gem "rspec-rails"
   gem "rspec-integration"
   gem "factory_girl_rails"
 
   gem "ZenTest"
   gem "redgreen"
   gem "diff-lcs"
-  gem "webrat", :group => :development
+  gem "webrat"
+ 
+  gem 'cucumber'
+  gem 'cucumber-rails'
 end
 
