@@ -5,7 +5,6 @@ class UserSessionsController < ApplicationController
 
   def new
     @user_session = UserSession.new
-    redirect_to @user_session.authorize_url(url_for(:action => :create))
   end
 
   def create
@@ -23,9 +22,5 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     flash[:notice] = t("Logout successful!")
     redirect_back_or_default new_user_session_url
-  end
-
-private
-  def authorize_url
   end
 end

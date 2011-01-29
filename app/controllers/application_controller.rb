@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = t("You must be logged in to access this page")
-      redirect_to new_user_path
+      redirect_to new_user_session_path
       return false
     end
   end
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     unless admin?
       store_location
       flash[:notice] = t("You must be logged in to access this page")
-      redirect_to new_user_path
+      redirect_to new_user_session_path
       return false
     end
   end
