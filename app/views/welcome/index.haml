@@ -1,1 +1,4 @@
-= button_to 'logout', user_session_path, :method => :delete
+- unless current_user
+  = button_to 'Login', user_session_path, :method => :post, :name => :login_with_twitter
+- if current_user
+  = button_to 'Logout', user_session_path, :method => :delete

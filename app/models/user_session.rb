@@ -10,11 +10,20 @@ class UserSession < Authlogic::Session::Base
     end
   end
 
+  def save(&block)
+    block = nil if redirecting_to_twitter_auth?
+    super(&block)
+  end
+
   private
 
   def authenticating_with_twitter?
     (! controller.params[:login_with_twitter].blank?) ||
       (! controller.params[:oauth_token].blank?)
+  end
+
+  def redirecting_to_twitter_auth?
+    authenticating_with_twitter? && controller.params[:oauth_token].blank?
   end
 
   def validate_by_twitter

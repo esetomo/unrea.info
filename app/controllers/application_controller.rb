@@ -2,8 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :admin?
-
-  before_filter :require_user, :set_locale
+  before_filter :set_locale
 
   private
   def require_user
