@@ -10,6 +10,4 @@
     = f.label :password
     = f.password_field :password
   %p
-    = f.submit :login
-    = raw(oauth_register_button :value => "Register with Twitter", :class => 'twitter')
-    = raw(oauth_login_button :value => "Login with Twitter", :class => 'twitter')
+    = submit_tag :login_with_twitter, :name => :login_with_twitter

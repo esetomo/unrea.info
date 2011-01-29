@@ -1,54 +1,73 @@
 # -*- coding: euc-jp -*-
 class UserSession < Authlogic::Session::Base
-  validate :validate_by_twitter
-
-  def self.oauth_consumer
-    Twitter::OAuth.new('VW0bNP19ZFhA5k1tW3RhA',
-                       'HSrt4RcTESzW0Z2XPVS2N7tWoznmB9aT96jBTjCrsI')
-  end
+  validate :validate_by_twitter, :if => :authenticating_with_twitter?
 
   def to_key
-    new_record? ? nil : [1]
-  end
-
-  def authorize_url(callback)
-    oauth = UserSession.oauth_consumer
-    request_token = oauth.request_token(:oauth_callback => callback)
-    controller.session[:request_token] = request_token.token
-    controller.session[:request_token_secret] = request_token.secret
-
-    return request_token.authorize_url
+    if user
+      [ user.id ]
+    else
+      nil
+    end
   end
 
   private
-  
+
+  def authenticating_with_twitter?
+    (! controller.params[:login_with_twitter].blank?) ||
+      (! controller.params[:oauth_token].blank?)
+  end
+
   def validate_by_twitter
-    oauth = UserSession.oauth_consumer
-
-    self.attempted_record = User.where(:oauth_token => controller.session[:oauth_token]).first
-    if self.attempted_record
-      oauth.authorize_from_access(self.attempted_record.oauth_token,
-                                  self.attempted_record.oauth_secret)
-      @client = Twitter::Base.new(oauth)
+    if controller.params[:oauth_token].blank?
+      redirect_to_twitter_auth
     else
-      request_token = OAuth::RequestToken.new(oauth.consumer,
-                                              controller.session[:request_token],
-                                              controller.session[:request_token_secret])
-      access_token = request_token.get_access_token({},
-                                                    :oauth_token => controller.params[:oauth_token],
-                                                    :oauth_verifier => controller.params[:oauth_verifier])
-
-      oauth.authorize_from_access(access_token.token, access_token.secret)        
-      @client = Twitter::Base.new(oauth)
-      user_info = @client.verify_credentials
-
-      self.attempted_record = User.find_or_create_by_twitter_uid(:twitter_uid => user_info['id_str'],
-                                                                 :oauth_token => access_token.token,
-                                                                 :oauth_secret => access_token.secret,
-                                                                 :name => user_info['name'],
-                                                                 :screen_name => user_info['screen_name'],
-                                                                 :avatar_url => user_info['profile_image_url'])
+      authenticate_with_twitter
     end
+  end
+
+  def redirect_to_twitter_auth
+    oauth = User.oauth_consumer
+    request_token = oauth.request_token(:oauth_callback => build_callback_url)
+    controller.session[:request_token] = request_token.token
+    controller.session[:request_token_secret] = request_token.secret
+    controller.session[:twitter_callback_method] = controller.request.method
+    controller.redirect_to request_token.authorize_url      
+  end
+
+  def build_callback_url
+    controller.url_for(:controller => controller.controller_name,
+                       :action => controller.action_name)
+  end
+
+  def record=(record)
+    @record = record
+  end
+
+  def authenticate_with_twitter
+    if @record
+      self.attempted_record = @record
+      return
+    end
+
+    oauth = User.oauth_consumer
+    request_token = OAuth::RequestToken.new(oauth.consumer,
+                                            controller.session[:request_token],
+                                            controller.session[:request_token_secret])
+    access_token = request_token.get_access_token({},
+                                                  :oauth_token => controller.params[:oauth_token],
+                                                  :oauth_verifier => controller.params[:oauth_verifier])
+
+    oauth.authorize_from_access(access_token.token, access_token.secret)        
+    client = Twitter::Base.new(oauth)
+    user_info = client.verify_credentials
+
+    self.attempted_record = User.find_or_initialize_by_twitter_uid(:twitter_uid => user_info['id_str'])
+    self.attempted_record.oauth_token = access_token.token
+    self.attempted_record.oauth_secret = access_token.secret
+    self.attempted_record.name = user_info['name']
+    self.attempted_record.screen_name = user_info['screen_name']
+    self.attempted_record.avatar_url = user_info['profile_image_url']
+    self.attempted_record.reset_persistence_token
   rescue OAuth::Unauthorized
     errors.add_to_base($!.message)
   end
