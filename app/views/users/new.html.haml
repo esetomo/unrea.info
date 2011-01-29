@@ -1,8 +1,0 @@
-%h1 New user
-
-= form_for @user, :url => account_path do |f|
-  = f.error_messages
-  = render 'form', :f => f
-  .actions
-    = f.submit 'Save'
-    = raw(oauth_register_button :value => 'Register with Twitter', :class => 'twitter')
