@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = t("You must be logged in to access this page")
-      redirect_to new_user_session_path
+      redirect_to root_url
       return false
     end
   end
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     unless admin?
       store_location
       flash[:notice] = t("You must be logged in to access this page")
-      redirect_to new_user_session_path
+      redirect_to root_url
       return false
     end
   end
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user && current_user.login == "admin"
+    current_user && current_user.twitter_uid == "54895358" # @15my
   end
 
   def store_location
