@@ -42,8 +42,9 @@ module Unrea
     config.generators do |g|
       g.orm :active_record
       g.template_engine :haml
-      g.test_framework :rspec, :fixture => true, :views => false, :webrat => true
+      g.test_framework :rspec, :fixture => true, :webrat => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
+      g.integration_tool :cucumber
     end
   end
 end
