@@ -44,7 +44,7 @@ module Unrea
       g.template_engine :haml
       g.test_framework :rspec, :fixture => true, :webrat => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
-      g.integration_tool :cucumber
+      g.integration_tool nil
     end
   end
 end
