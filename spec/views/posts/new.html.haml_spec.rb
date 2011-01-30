@@ -11,10 +11,9 @@ describe "posts/new.html.haml" do
   it "renders new post form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => posts_path, :method => "post" do
-      assert_select "input#post_title", :name => "post[title]"
-      assert_select "textarea#post_content", :name => "post[content]"
+    rendered.should have_selector("form", :action => posts_path, :method => "post") do |form|
+      form.should have_selector("input#post_title", :name => "post[title]")
+      form.should have_selector("textarea#post_content", :name => "post[content]")
     end
   end
 end
