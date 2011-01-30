@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
+  has_many :posts
+
   CONSUMER_KEY = 'VW0bNP19ZFhA5k1tW3RhA'
   CONSUMER_SECRET = 'HSrt4RcTESzW0Z2XPVS2N7tWoznmB9aT96jBTjCrsI'
 

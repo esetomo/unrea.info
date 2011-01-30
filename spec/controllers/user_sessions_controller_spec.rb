@@ -11,14 +11,14 @@ describe UserSessionsController do
   describe "GET 'create'" do
     it "should be successful" do
       get 'create'
-      response.should be_success
+      response.should_not be_success
     end
   end
 
   describe "GET 'destroy'" do
     it "should be successful" do
       get 'destroy'
-      response.should redirect_to(new_user_session_path)
+      response.should redirect_to(root_path)
     end
   end
 
@@ -46,7 +46,7 @@ describe UserSessionsController do
     describe "GET 'destroy'" do
       it "should be successful" do
         get 'destroy'
-        response.should redirect_to(new_user_session_path)
+        response.should redirect_to(root_path)
       end
     end
   end
