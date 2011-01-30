@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     unless admin?
-      store_location
-      flash[:notice] = t("You must be logged in to access this page")
-      redirect_to root_url
+      render(:file => "#{RAILS_ROOT}/public/404.html", 
+             :status => :notfound, 
+             :layout => false)
       return false
     end
   end

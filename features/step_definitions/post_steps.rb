@@ -1,3 +1,8 @@
+Given /^I am logged in as the admin$/ do
+  p(session)
+  pending
+end
+
 Given /^the following posts:$/ do |posts|
   Post.create!(posts.hashes)
 end

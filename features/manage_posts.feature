@@ -4,7 +4,8 @@ Feature: Manage posts
   wants [behaviour]
   
   Scenario: Register new post
-    Given I am on the new post page
+    Given I am logged in as the admin
+    And I am on the new post page
     When I fill in "Title" with "title 1"
     And I fill in "Content" with "content 1"
     And I press "Create"
@@ -12,7 +13,8 @@ Feature: Manage posts
     And I should see "content 1"
 
   Scenario: Delete post
-    Given the following posts:
+    Given I am logged in as the admin
+    And the following posts:
       |title|content|
       |title 1|content 1|
       |title 2|content 2|
