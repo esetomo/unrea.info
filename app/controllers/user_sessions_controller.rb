@@ -1,6 +1,11 @@
 class UserSessionsController < ApplicationController
-  before_filter :require_no_user, :only => :create
+  before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
+
+  def new
+    @user_session = UserSession.new
+    render :layout => nil
+  end
 
   def create
     @user_session = UserSession.new(params)

@@ -1,15 +1,6 @@
 Unrea::Application.routes.draw do
   resource :user_session do
-    member do
-      get 'create'
-    end
-  end
-
-  resource :oauth do
-    member do
-      get 'verify'
-      get 'callback'
-    end
+    get :create
   end
 
   root :to => "welcome#index"

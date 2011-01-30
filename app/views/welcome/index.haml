@@ -1,4 +1,6 @@
+%p 工事中でち。- @15my
+= flash[:notice]
 - unless current_user
-  = button_to 'Login', user_session_path, :method => :post, :name => :login_with_twitter
+  = button_to 'Login', user_session_path(:login_with_twitter => 1), :method => :post
 - if current_user
   = button_to 'Logout', user_session_path, :method => :delete

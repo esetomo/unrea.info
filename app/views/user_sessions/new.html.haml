@@ -1,13 +1,6 @@
-%h1 UserSessions#new
-%p Find me in app/views/user_sessions/new.html.haml
-= form_for @user_session do |f|
-  %p
-    = f.error_messages
-  %p
-    = f.label :login
-    = f.text_field :login
-  %p
-    = f.label :password
-    = f.password_field :password
-  %p
-    = submit_tag :login_with_twitter, :name => :login_with_twitter
+%html
+  %head
+    %title redirect
+  %body{:onload => "new_user_session.submit()"} 
+    = form_for @user_session do |f|
+      %input{:type => :hidden, :name => :login_with_twitter, :value => 1}
