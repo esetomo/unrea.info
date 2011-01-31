@@ -16,7 +16,7 @@ gem 'haml-rails'
 
 gem 'authlogic'
 gem 'oauth'
-gem 'twitter'
+gem 'twitter', '1.0.0'
 # gem 'authlogic-oauth', :require => 'authlogic_oauth'
 
 group :development do

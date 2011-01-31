@@ -4,10 +4,10 @@ end
 
 def admin_login
   admin_user
-  visit path_to("the new user session page")
-  fill_in "user_session_login", :with => "admin"
-  fill_in "user_session_password", :with => "admin"
-  click_button "user_session_submit"
+  visit path_to("the home page")
+  click_button "Login"
+  click_link "Allow"
+  response.should contain("Login successful!")
 end
 
 Given /^I am logged in as the admin$/ do
