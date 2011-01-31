@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     unless admin?
-      render(:file => "#{RAILS_ROOT}/public/404.html", 
+      render(:file => "#{Rails.root}/public/404.html", 
              :status => :notfound, 
              :layout => false)
       return false

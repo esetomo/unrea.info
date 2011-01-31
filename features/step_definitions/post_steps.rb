@@ -1,6 +1,7 @@
 Given /^I am logged in as the admin$/ do
-  p(session)
-  pending
+  Twitter.api_endpoint = 'www.example.com/dummy_twitter'
+  visit "/user_session?login_with_twitter=1"
+  click_link "Allow"
 end
 
 Given /^the following posts:$/ do |posts|
