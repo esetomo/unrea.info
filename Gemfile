@@ -16,14 +16,14 @@ gem 'haml-rails'
 
 gem 'authlogic'
 gem 'oauth'
-gem 'twitter', '1.0.0'
+gem 'twitter'
 # gem 'authlogic-oauth', :require => 'authlogic_oauth'
 
 group :development do
   gem "rails-erd"
 end
 
-group :development, :test do
+group :test do
   gem "rspec"
   gem "rspec-rails"
   gem "rspec-integration"
@@ -37,6 +37,8 @@ group :development, :test do
   gem 'cucumber-rails'
   gem 'webrat'
   gem 'database_cleaner'
+  gem 'fakeweb'
+  gem 'net-http-spy'
 end
 
 case RUBY_VERSION

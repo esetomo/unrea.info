@@ -4,10 +4,12 @@ end
 
 def admin_login
   admin_user
+  stub_post('https://api.twitter.com/oauth/request_token', 'access_token')
+  stub_post('https://api.twitter.com/oauth/access_token', 'access_token')
+  stub_get('https://api.twitter.com/1/account/verify_credentials.json', 'veryfy_credentials.json')
   visit path_to("the home page")
   click_button "Login"
-  click_link "Allow"
-  response.should contain("Login successful!")
+  visit user_session_path(:oauth_token => 'OT', :oauth_verifier => 'OV')
 end
 
 Given /^I am logged in as the admin$/ do
