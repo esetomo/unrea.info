@@ -32,10 +32,11 @@ group :development, :test do
   gem "ZenTest"
   gem "redgreen"
   gem "diff-lcs"
-  gem "webrat"
  
   gem 'cucumber'
   gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 case RUBY_VERSION
