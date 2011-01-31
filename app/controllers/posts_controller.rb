@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  # before_filter :require_admin, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :require_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.xml
@@ -10,6 +10,10 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
     end
+  end
+
+  def index_by_month
+    render :text => ''
   end
 
   # GET /posts/1

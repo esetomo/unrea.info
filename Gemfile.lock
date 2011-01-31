@@ -193,6 +193,7 @@ DEPENDENCIES
   ZenTest
   authlogic
   bson_ext
+  capybara
   cucumber
   cucumber-rails
   database_cleaner

@@ -35,6 +35,7 @@ group :test do
  
   gem 'cucumber'
   gem 'cucumber-rails'
+  gem 'capybara'
   gem 'webrat'
   gem 'database_cleaner'
   gem 'fakeweb'
