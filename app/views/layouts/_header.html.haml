@@ -1,5 +1,10 @@
 %header#main_header
   %h1 unrea.info
+  = flash[:notice]
+  - unless current_user
+    = button_to 'Login', user_session_path(:login_with_twitter => 1), :method => :post
+  - if current_user
+    = button_to 'Logout', user_session_path, :method => :delete
   %nav#main_nav
     %ul
       %li menu1    

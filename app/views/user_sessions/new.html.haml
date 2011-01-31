@@ -1,6 +1,8 @@
 %html
   %head
-    %title redirect
-  %body{:onload => "new_user_session.submit()"} 
+    %title Login
+  %body
     = form_for @user_session do |f|
-      %input{:type => :hidden, :name => :login_with_twitter, :value => 1}
+      = f.text_field :login
+      = f.password_field :password
+      = f.submit :submit      

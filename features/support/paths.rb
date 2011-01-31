@@ -12,7 +12,8 @@ module NavigationHelpers
       '/'
     when /the new post page/
       new_post_path
-
+    when /the new user session page/
+      new_user_session_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

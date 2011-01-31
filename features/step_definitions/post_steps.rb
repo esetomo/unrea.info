@@ -1,7 +1,21 @@
+def admin_user
+  @admin_user ||= Factory :admin_user
+end
+
+def admin_login
+  admin_user
+  visit path_to("the new user session page")
+  fill_in "user_session_login", :with => "admin"
+  fill_in "user_session_password", :with => "admin"
+  click_button "user_session_submit"
+end
+
 Given /^I am logged in as the admin$/ do
-  Twitter.api_endpoint = 'www.example.com/dummy_twitter'
-  visit "/user_session?login_with_twitter=1"
-  click_link "Allow"
+  admin_login
+end
+
+When /^I login as the admin$/ do
+  admin_login
 end
 
 Given /^the following posts:$/ do |posts|
