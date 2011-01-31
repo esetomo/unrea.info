@@ -34,7 +34,9 @@ class ApplicationController < ActionController::Base
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
+    ActiveSupport::Deprecation.silence do # save(false) is deprecated.
+      @current_user_session = UserSession.find
+    end
   end
 
   def current_user

@@ -12,7 +12,9 @@ class UserSession < Authlogic::Session::Base
 
   def save(&block)
     block = nil if redirecting_to_twitter_auth?
-    super(&block)
+    ActiveSupport::Deprecation.silence do # save(false) is deprecated.
+      super(&block)
+    end
   end
 
   private

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  ActiveSupport::Deprecation.silence do # Base.named_scope has been deprecated.
+    acts_as_authentic
+  end
 
   has_many :posts
 
