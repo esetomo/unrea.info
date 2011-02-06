@@ -6,3 +6,4 @@ tmp/**/*
 webrat.log
 config/initializers/secret_token.rb
 config/initializers/twitter.rb
+config/app.yml

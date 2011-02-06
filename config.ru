@@ -1,4 +1,4 @@
-# This file is used by Rack-based servers to start the application.
+# -*- mode:ruby -*-
 
-require ::File.expand_path('../config/environment',  __FILE__)
-run Unrea::Application
+require ::File.expand_path('../main', __FILE__)
+run Sinatra::Application
