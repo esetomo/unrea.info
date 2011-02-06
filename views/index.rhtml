@@ -1,6 +1,6 @@
 <p>工事中でち。- @15my</p>
-<p><%= request.env['APIGEE_TWITTER_API_ENDPOINT'] %></p>
-<p><%= request.env['APIGEE_TWITTER_SEARCH_API_ENDPOINT'] %></p>
+<p><%= ENV['APIGEE_TWITTER_API_ENDPOINT'] %></p>
+<p><%= ENV['APIGEE_TWITTER_SEARCH_API_ENDPOINT'] %></p>
 <% if @twitter %>
   <ul>
     <% @twitter.friends_timeline.each do |t| %>
