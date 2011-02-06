@@ -24,18 +24,7 @@ helpers do
 end
 
 get '/' do
-  if @twitter
-    erb %{
-      <p>Hello!!</p>
-      <p><a href="/logout">Logout</a></p>
-    }
-  else
-    erb %{
-      <p><%= session.inspect %></p>
-      <p>Hello!!</p>
-      <p><a href="/login">Login</a></p>
-    }
-  end
+  erb :index
 end
 
 def signing_consumer
