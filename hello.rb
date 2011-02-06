@@ -4,6 +4,8 @@ Bundler.require
 Twitter.configure do |config|
   config.consumer_key = 'tYGPFKb527dlTha1YXzw'
   config.consumer_secret = 'MoLVVdeVvBFPyNexl3DRo2p9SxA3O2gf2YGw4vdoeM'
+  config.endpoint = 'http://APIGEE_TWITTER_API_ENDPOINT'
+  config.search_endpoint = 'http://APIGEE_TWITTER_SEARCH_API_ENDPOINT'
 end
 
 enable :sessions
