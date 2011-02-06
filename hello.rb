@@ -29,7 +29,7 @@ get '/' do
   end
 end
 
-def signinng_consumer
+def signing_consumer
   @signing_consumer ||= OAuth::Consumer.new(Twitter.options[:consumer_key],
                                             Twitter.options[:consumer_secret],
                                             :site => 'https://api.twitter.com',
