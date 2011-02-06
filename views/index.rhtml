@@ -1,1 +1,8 @@
 <p>工事中でち。- @15my</p>
+<% if @twitter %>
+  <ul>
+    <% @twitter.friends_timeline.each do |t| %>
+      <%= t.inspect %>
+    <% end %>
+  </ul>
+<% end %>
