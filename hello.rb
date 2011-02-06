@@ -8,23 +8,14 @@ Twitter.configure do |config|
   config.search_endpoint = 'http://' + ENV['APIGEE_TWITTER_SEARCH_API_ENDPOINT']
 end
 
-module Faraday
-  class Request::OAuth < Faraday::Middleware
-    def call_with_signature_url(env)
-      signature_url = env[:url].dup
-      signature_url.host = 'api.twitter.com'
-      
-      params = env[:body].is_a?(Hash) ? env[:body] : {}
-      signature_params = params.reject{|k,v| v.respond_to?(:content_type) }
-      header = SimpleOAuth::Header.new(env[:method], signature_url, signature_params, @options)
-
-      env[:request_headers]['Authorization'] = header.to_s
-
-      @app.call(env)
-    end
-
-    alias_method_chain :call, :signature_url
+class SimpleOAuth::Header
+  def initialize_with_signature_url(method, url, params, oauth = {})
+    url = url.dup
+    url.host = 'api.twitter.com'
+    initialize_without_signature_url(method, url, params, oauth)
   end
+
+  alias_method_chain :initialize, :signature_url
 end
 
 enable :sessions
