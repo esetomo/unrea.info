@@ -6,6 +6,8 @@ Twitter.configure do |config|
   config.consumer_secret = 'MoLVVdeVvBFPyNexl3DRo2p9SxA3O2gf2YGw4vdoeM'
 end
 
+enable :sessions
+
 before do
   if session[:access_token]
     @twitter = Twitter::Client.new(:oauth_token => session[:access_token],
@@ -29,6 +31,7 @@ get '/' do
     }
   else
     erb %{
+      <p><%= session.inspect %></p>
       <p>Hello!!</p>
       <p><a href="/login">Login</a></p>
     }
@@ -64,4 +67,5 @@ end
 get '/logout' do
   session[:access_token] = nil
   session[:access_token_secret] = nil
+  redirect '/'
 end
