@@ -1,4 +1,5 @@
-require 'sinatra'
+require 'bundler'
+Bundler.require
 
 Twitter.configure do |config|
   config.consumer_key = 'tYGPFKb527dlTha1YXzw'
@@ -46,7 +47,7 @@ get '/callback' do
   request_token = OAuth::RequestToken.new(signing_consumer,
                                           session[:request_token],
                                           session[:request_token_secret])
-  @access_token = request_token.get_access_token({}
+  @access_token = request_token.get_access_token({},
                                                  :oauth_token => params[:oauth_token],
                                                  :oauth_verifier => params[:oauth_verifier])
   session[:access_token] = @access_token.token
