@@ -1,0 +1,22 @@
+!!!
+%html
+    %head
+        %meta{:charset => 'utf-8'}
+        %title Unrea
+        = javascript_include_tag :defaults
+        = javascript_include_tag "http://platform.twitter.com/anywhere.js?id=#{Twitter.options[:consumer_key]}&v=1"
+        :javascript
+            twttr.anywhere(function(T){
+                T.hovercards();
+            });
+        = stylesheet_link_tag 'main'
+        /[if lte IE 8]
+            = javascript_include_tag 'html5', 'IE9'
+            = stylesheet_link_tag 'ie'
+        = csrf_meta_tag	
+        = yield :head
+    %body 
+        = render 'layouts/header'
+        = yield
+        = render 'layouts/sidebar'
+        = render 'layouts/footer'
