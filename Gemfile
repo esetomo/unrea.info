@@ -28,6 +28,7 @@ group :test do
   gem "rspec-rails"
   gem "rspec-integration"
   gem "factory_girl_rails"
+  gem "spork"
 
   gem "ZenTest"
   gem "redgreen"
