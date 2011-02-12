@@ -14,7 +14,6 @@ gem 'mongoid', '>= 2.0.0.rc'
 gem 'haml'
 gem 'haml-rails'
 
-gem 'authlogic'
 gem 'oauth'
 gem 'twitter'
 gem 'uuidtools'
@@ -29,6 +28,7 @@ group :test do
   gem "rspec-integration"
   gem "factory_girl_rails"
   gem "spork"
+  gem "remarkable_mongoid"
 
   gem "ZenTest"
   gem "redgreen"

@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     user.oauth_token = access_token.token
     user.oauth_secret = access_token.secret
     user.build_info(user_info)
+    user.screen_name = user.info.screen_name
     user.profile_image_bigger = user.twitter.profile_image(user.info.screen_name, :size => :bigger)
     user.profile_image_mini = user.twitter.profile_image(user.info.screen_name, :size => :mini)
     user.save!
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where('info.screen_name' => params[:screen_name]).first
+    @user = User.where(:screen_name => params[:screen_name]).first
     raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
   end
 

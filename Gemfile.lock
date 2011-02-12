@@ -38,8 +38,6 @@ GEM
     activesupport (3.0.4)
     addressable (2.2.4)
     arel (2.0.8)
-    authlogic (2.1.6)
-      activesupport
     bson (1.2.1)
     bson_ext (1.2.1)
     builder (2.1.2)
@@ -146,6 +144,13 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     redgreen (1.2.2)
+    remarkable (4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_activemodel (4.0.0.alpha4)
+      remarkable (~> 4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_mongoid (0.5.2)
+      remarkable_activemodel (~> 4.0.0.alpha4)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -198,7 +203,6 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest
-  authlogic
   bson_ext
   capybara
   cucumber
@@ -219,6 +223,7 @@ DEPENDENCIES
   rails-erd
   rails3-generators
   redgreen
+  remarkable_mongoid
   rspec
   rspec-integration
   rspec-rails
