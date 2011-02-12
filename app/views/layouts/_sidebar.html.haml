@@ -1,2 +1,12 @@
 %aside#sidebar
-  sidebar
+  - if current_user
+    %ul#userinfo
+      %li
+        = current_user.name
+      %li
+        = current_user.screen_name
+      %li
+        = image_tag current_user.avatar_url
+  - else
+    Login
+    
