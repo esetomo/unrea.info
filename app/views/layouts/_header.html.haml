@@ -3,6 +3,6 @@
   %h1 アンリア
   = flash[:notice]
   - unless current_user
-    = button_to 'Login', user_session_path(:login_with_twitter => 1), :method => :post
+    = button_to 'Login', login_path, :method => :post
   - if current_user
-    = button_to 'Logout', user_session_path, :method => :delete
+    = button_to 'Logout', logout_path, :method => :delete

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user_session, :current_user, :admin?
+  helper_method :current_user, :admin?
   before_filter :set_locale
 
   private
@@ -32,16 +32,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-    ActiveSupport::Deprecation.silence do # save(false) is deprecated.
-      @current_user_session = UserSession.find
-    end
-  end
-
   def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.user
+    @current_user ||= User.where(:session_token => session[:token]).first
   end
 
   def admin?

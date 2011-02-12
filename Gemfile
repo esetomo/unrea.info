@@ -1,7 +1,7 @@
 # -*- mode:ruby; coding:utf-8 -*-
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails'
 gem 'pg'
 
 gem 'rails3-generators'
@@ -17,6 +17,7 @@ gem 'haml-rails'
 gem 'authlogic'
 gem 'oauth'
 gem 'twitter'
+gem 'uuidtools'
 
 group :development do
   gem "rails-erd"

@@ -2,7 +2,9 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   
-  # acts_as_authentic
+  field :session_token, :type => String
+  field :oauth_token, :type => String
+  field :oauth_secret, :type => String
 
   has_many :posts
 
