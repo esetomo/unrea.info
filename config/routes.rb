@@ -1,6 +1,4 @@
 Unrea::Application.routes.draw do
-  resources :posts
-
   match 'login' => 'users#login'
   match 'callback' => 'users#callback'
   match 'logout' => 'users#logout'
