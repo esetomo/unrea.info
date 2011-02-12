@@ -13,6 +13,10 @@ class User
 
   has_many :posts
 
+  def to_key
+    [info.screen_name]
+  end
+
   def twitter
     unless @twitter
       @twitter = Twitter::Client.new(:oauth_token => oauth_token,
