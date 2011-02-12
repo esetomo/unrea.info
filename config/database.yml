@@ -13,7 +13,7 @@ development:
   encoding: unicode
   database: unrea_development
   pool: 5
-  username: s-tomo
+  username:
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -39,7 +39,7 @@ test: &test
   encoding: unicode
   database: unrea_test
   pool: 5
-  username: s-tomo
+  username:
   password:
   min_messages: WARNING
 
@@ -48,7 +48,7 @@ production:
   encoding: unicode
   database: unrea_production
   pool: 5
-  username: s-tomo
+  username:
   password:
 
 cucumber:

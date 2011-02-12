@@ -1,0 +1,37 @@
+# -*- ruby -*-
+
+# require 'autotest/autoupdate'
+# require 'autotest/bundler'
+# require 'autotest/isolate'
+# require 'autotest/once'
+# require 'autotest/rcov'
+# require 'autotest/restart'
+# require 'autotest/timestamp'
+
+# Autotest::AutoUpdate.sleep_time = o
+# Autotest::AutoUpdate.update_cmd = o
+# Autotest::Isolate.dir = o
+# Autotest::RCov.command = o
+# Autotest::RCov.pattern = o
+# Autotest::RCov.options = o
+
+module Autotest::Growl
+  def self.growl title, msg, img="~/.autotest_icons/rails_ok.png", pri=0, sticky=""
+    msg += " at #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
+    system "growlnotify -n autotest -H localhost --image #{img} -p #{pri} -m #{msg.inspect} #{title} #{sticky}"
+  end
+
+  Autotest.add_hook :ran_command do |at|
+    output = at.results.last.slice(/(\d+)\s+tests,\s*(\d+)\s+assertions,\s*(\d+)\s+failures,\s*(\d+)\s+errors/)
+    if output
+      if $~[3].to_i > 0 || $~[4].to_i > 0
+        growl "Tests Failed", "#{output}", "~/.autotest_icons/rails_fail.png", 2, "-s"
+      else
+        growl "Tests Passed", "#{output}", "~/.autotest_icons/rails_ok.png", -2
+      end
+    else
+      growl "Tests Failed", "errors", "~/.autotest_icons/rails_fail.png", 2, "-s"
+    end
+  end
+end
+
