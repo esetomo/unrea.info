@@ -24,7 +24,6 @@ end
 
 group :test do
   gem "rspec"
-  gem "rspec-rails"
   gem "rspec-integration"
   gem "factory_girl_rails"
   gem "spork"
@@ -41,6 +40,10 @@ group :test do
   gem 'database_cleaner'
   gem 'fakeweb'
   gem 'net-http-spy'
+end
+
+group :test, :development do
+  gem "rspec-rails"
 end
 
 case RUBY_VERSION
