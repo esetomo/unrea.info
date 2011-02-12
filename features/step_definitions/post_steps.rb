@@ -7,6 +7,9 @@ def admin_login
   stub_post('https://api.twitter.com/oauth/request_token', 'access_token')
   stub_post('https://api.twitter.com/oauth/access_token', 'access_token')
   stub_get('https://api.twitter.com/1/account/verify_credentials.json', 'veryfy_credentials.json')
+  stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=bigger', 'profile_image.json')
+  stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=mini', 'profile_image.json')
+
   visit path_to("the login page")
   visit callback_path(:oauth_token => 'OT', :oauth_verifier => 'OV')
 end

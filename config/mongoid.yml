@@ -23,3 +23,6 @@ production:
 #  username: <%= ENV['MONGOID_USERNAME'] %>
 #  password: <%= ENV['MONGOID_PASSWORD'] %>
 #  database: <%= ENV['MONGOID_DATABASE'] %>
+
+cucumber:
+  <<: *test

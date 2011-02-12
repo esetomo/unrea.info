@@ -11,8 +11,8 @@ describe UsersController do
     stub_post('https://api.twitter.com/oauth/request_token', 'access_token')
     stub_post('https://api.twitter.com/oauth/access_token', 'access_token')
     stub_get('https://api.twitter.com/1/account/verify_credentials.json', 'veryfy_credentials.json')
-    stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=bigger', 'veryfy_credentials.json')
-    stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=mini', 'veryfy_credentials.json')
+    stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=bigger', 'profile_image.json')
+    stub_get('https://api.twitter.com/1/users/profile_image/15my.json?size=mini', 'profile_image.json')
   end
 
   def mock_user(stubs={})

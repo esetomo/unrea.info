@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    return nil unless session[:token]
     @current_user ||= User.where(:session_token => session[:token]).first
   end
 
