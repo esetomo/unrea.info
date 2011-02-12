@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :session_token, :type => String
   field :oauth_token, :type => String
   field :oauth_secret, :type => String
@@ -16,7 +16,7 @@ class User
   validates_uniqueness_of :screen_name
 
   def to_key
-    [info.screen_name]
+    [screen_name]
   end
 
   def twitter
