@@ -16,17 +16,26 @@ class UsersController < ApplicationController
     access_token = request_token.get_access_token({},
                                                   :oauth_token => params[:oauth_token],
                                                   :oauth_verifier => params[:oauth_verifier])
-    session[:token] = UUIDTools::UUID.random_create.to_s
-    user = User.create!(:session_token => session[:token],
-                       :oauth_token => access_token.token,
-                       :oauth_secret => access_token.secret)
+
+    user = User.new(:oauth_token => access_token.token,
+                    :oauth_secret => access_token.secret)
     user_info = user.twitter.verify_credentials
+
+    session[:token] = UUIDTools::UUID.random_create.to_s
+    user = User.find_or_initialize_by(:twitter_id => user_info[:id].to_s)
+    user.session_token = session[:token]
+    user.oauth_token = access_token.token
+    user.oauth_secret = access_token.secret
+    user.build_info(user_info)
+    user.profile_image_bigger = user.twitter.profile_image(user.info.screen_name, :size => :bigger)
+    user.profile_image_mini = user.twitter.profile_image(user.info.screen_name, :size => :mini)
+    user.save!
     
     redirect_to root_url
   end
 
   def logout
-    current_user.token = nil
+    current_user.session_token = nil
     current_user.save!
     redirect_to root_path
   end

@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user && current_user.twitter_uid == "54895358" # @15my
+    current_user && current_user.twitter_id == "54895358" # @15my
   end
 
   def store_location

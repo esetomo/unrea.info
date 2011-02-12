@@ -6,6 +6,11 @@ class User
   field :oauth_token, :type => String
   field :oauth_secret, :type => String
 
+  field :twitter_id, :type => String
+  embeds_one :info, :class_name => 'UserInfo'
+  field :profile_image_bigger, :type => String
+  field :profile_image_mini, :type => String
+
   has_many :posts
 
   def twitter
