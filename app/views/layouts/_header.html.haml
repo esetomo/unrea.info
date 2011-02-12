@@ -1,8 +1,15 @@
 %header#main_header
-  %p サブタイトル未定
-  %h1 アンリア
-  = flash[:notice]
-  - unless current_user
-    = button_to 'Login', login_path, :method => :post
-  - if current_user
-    = button_to 'Logout', logout_path, :method => :delete
+  %h1 
+    = link_to 'unrea.info', root_path
+  %nav
+    %ul#main_menu
+      %li
+        = link_to 'Home', root_path
+      - unless current_user
+        %li
+          = link_to(image_tag("http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png",
+                              :alt => 'Sign in with twitter'),
+                    login_path)
+      - if current_user
+        %li        
+          = link_to '[Logout]', logout_path

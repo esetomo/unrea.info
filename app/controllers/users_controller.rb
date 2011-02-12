@@ -40,6 +40,11 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @user = User.where('info.screen_name' => params[:screen_name]).first
+    raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
+  end
+
 private
   def signing_consumer
     @signing_consumer ||= OAuth::Consumer.new(Twitter.options[:consumer_key],
