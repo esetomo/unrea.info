@@ -5,5 +5,5 @@ class Post
   field :title, :type => String
   field :content, :type => String
   
-  referenced_in :user
+  # referenced_in :user
 end

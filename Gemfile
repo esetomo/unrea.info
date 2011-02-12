@@ -9,7 +9,7 @@ gem 'jquery-rails'
 gem 'i18n_generators'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'bson_ext'
-gem 'mongoid'
+gem 'mongoid', '>= 2.0.0.rc'
 
 gem 'haml'
 gem 'haml-rails'
