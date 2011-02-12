@@ -1,7 +1,8 @@
-class User < ActiveRecord::Base
-  ActiveSupport::Deprecation.silence do # Base.named_scope has been deprecated.
-    acts_as_authentic
-  end
+class User
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  # acts_as_authentic
 
   has_many :posts
 

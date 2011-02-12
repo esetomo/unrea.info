@@ -9,7 +9,7 @@ gem 'jquery-rails'
 gem 'i18n_generators'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'bson_ext'
-gem 'mongo'
+gem 'mongoid'
 
 gem 'haml'
 gem 'haml-rails'
@@ -17,7 +17,6 @@ gem 'haml-rails'
 gem 'authlogic'
 gem 'oauth'
 gem 'twitter'
-# gem 'authlogic-oauth', :require => 'authlogic_oauth'
 
 group :development do
   gem "rails-erd"

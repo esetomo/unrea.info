@@ -40,7 +40,7 @@ module Unrea
     config.filter_parameters += [:password]
 
     config.generators do |g|
-      g.orm :active_record
+      g.orm :mongoid
       g.template_engine :haml
       g.test_framework :rspec, :fixture => true, :webrat => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"

@@ -105,6 +105,11 @@ GEM
     mime-types (1.16)
     mongo (1.2.0)
       bson (>= 1.2.0)
+    mongoid (2.0.0.rc.6)
+      activemodel (~> 3.0)
+      mongo (~> 1.2)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
     multi_json (0.0.5)
     multi_xml (0.2.0)
     multipart-post (1.1.0)
@@ -201,7 +206,7 @@ DEPENDENCIES
   haml-rails
   i18n_generators
   jquery-rails
-  mongo
+  mongoid
   net-http-spy
   oauth
   pg
