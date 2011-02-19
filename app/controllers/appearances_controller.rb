@@ -11,7 +11,7 @@ class AppearancesController < ApplicationController
   end
 
   def respond_to_jpg
-    work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create)
+    work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
     work_dir.mkdir
 
     open(work_dir.join('Camera.tga'), "w") do |w|
@@ -25,7 +25,7 @@ class AppearancesController < ApplicationController
 
     ENV['WORK_DIR'] = work_dir.to_s
     render_script = Rails.root.join('lib', 'render', 'render.py')
-    system("blender -noaudio -b -P #{render_script}")
+    system("/home/s-tomo/Applications/blender/blender -noaudio -b -P #{render_script}")
     result_file = work_dir.join('result.jpg')
 
     send_file(result_file, :type => 'image/jpg')
