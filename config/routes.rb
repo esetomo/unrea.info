@@ -7,7 +7,13 @@ Unrea::Application.routes.draw do
   end
 
   controller :appearances do
-    match 'render'
+    get 'u/:screen_name/a', :action => :index, :as => :user_appearances
+    get 'u/:screen_name/a/new', :action => :new, :as => :new_user_appearance
+    get 'u/:screen_name/a/:id', :action => :show, :as => :user_appearance
+    get 'u/:screen_name/a/:id/edit', :action => :edit, :as => :edit_user_appearance
+    post 'u/:screen_name/a', :action => :create
+    put 'u/:screen_name/a/:id', :action => :update
+    delete 'u/:screen_name/a/:id', :action => :destroy
   end
 
   root :to => "welcome#index"
