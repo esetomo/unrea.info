@@ -1,34 +1,40 @@
 class AppearancesController < ApplicationController
-  # caches_page :show, :if => Proc.new { |c| c.request.format.jpg? }
+  def index
+    @appearances = user.appearances
+  end
 
   def show
+    @appearance = user.appearances.find(params[:id])
     respond_to do |format|
-      format.html {
-        expire_page(url_for(:only_path => true, :format => :jpg))
-      }
-      format.jpg { respond_to_jpg }
+      format.html 
+      format.jpg { send_data(@appearance.image, :type => 'image/jpg') }
     end
   end
 
-  def respond_to_jpg
-    work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
-    work_dir.mkdir
+  def new
+    @appearance = user.appearances.new
+  end
 
-    open(work_dir.join('Camera.tga'), "w") do |w|
+  def create
+    @appearance = user.appearances.new(params[:appearance])
+    @appearance.render
+    @appearance.save!
+    redirect_to :action => :index
+  end
+
+  def destroy
+    @appearance = user.appearances.find(params[:id])
+    @appearance.destroy
+
+    redirect_to :action => :index
+  end
+
+private
+  def user
+    unless @user
+      @user = User.where(:screen_name => params[:screen_name]).first
+      raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
     end
-
-    open(work_dir.join('Lamp.tga'), "w") do |w|
-    end
-
-    open(work_dir.join('Cube.tga'), "w") do |w|
-    end
-
-    ENV['WORK_DIR'] = work_dir.to_s
-    render_script = Rails.root.join('lib', 'render', 'render.py')
-    system("/home/s-tomo/Applications/blender/blender -noaudio -b -P #{render_script}")
-    result_file = work_dir.join('result.jpg')
-
-    send_file(result_file, :type => 'image/jpg')
-    work_dir.rmtree
+    return @user
   end
 end
