@@ -12,6 +12,8 @@ class User
   field :profile_image_bigger, :type => String
   field :profile_image_mini, :type => String
 
+  references_many :appearances
+
   validates_uniqueness_of :twitter_id
   validates_uniqueness_of :screen_name
 
