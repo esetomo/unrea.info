@@ -1,0 +1,16 @@
+#main_content
+  #main_section_wrap
+    %section#main_section
+      %header
+        %h1 Appearances
+      - @appearances.each do |appearance|
+        %article
+          = image_tag(user_appearance_path(@user, appearance, :format => :jpg))
+          - if @user == current_user
+            %aside
+              = link_to('Edit', edit_user_appearance_path(@user, appearance), :method => :get)
+              = link_to('Delete', user_appearance_path(@user, appearance), :method => :delete)
+      %footer
+        - if @user == current_user
+          = link_to('New Appearance', new_user_appearance_path(@user))
+  = render :partial => 'users/sidebar'

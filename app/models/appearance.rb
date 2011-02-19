@@ -2,6 +2,8 @@ class Appearance
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :key, :type => String
+
   referenced_in :user, :inverse_of => :appearances
 
   def image

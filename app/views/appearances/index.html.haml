@@ -1,9 +1,8 @@
-= render :partial => 'users/sidebar'
-%header
-  %h1 Appearances
-- @appearances.each do |appearance|
-  %article
-    = image_tag(user_appearance_path(@user, appearance, :format => :jpg))
-    = button_to('Delete', user_appearance_path(@user, appearance), :method => :delete)
-%footer
-  = link_to 'New Appearance', new_user_appearance_path(@user)
+#main_content
+  #main_section_wrap
+    %section#main_section
+      %header
+        %h1 Appearances
+      - @appearances.each do |appearance|
+        %article
+          = image_tag(appearance_path(appearance, :format => :jpg))

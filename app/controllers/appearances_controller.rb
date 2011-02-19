@@ -1,10 +1,10 @@
 class AppearancesController < ApplicationController
   def index
-    @appearances = user.appearances
+    @appearances = Appearance.all
   end
 
   def show
-    @appearance = user.appearances.find(params[:id])
+    @appearance = Appearance.find(params[:id])
     respond_to do |format|
       format.html 
       format.jpg { send_data(@appearance.image, :type => 'image/jpg') }
@@ -12,29 +12,24 @@ class AppearancesController < ApplicationController
   end
 
   def new
-    @appearance = user.appearances.new
-  end
-
-  def create
-    @appearance = user.appearances.new(params[:appearance])
+    @appearance = Appearance.new
+    @appearance.key = SecureRandom.base64(12)
     @appearance.render
     @appearance.save!
-    redirect_to :action => :index
+    redirect_to appearance_edit_path(@appearance, @appearance.key)
   end
 
-  def destroy
-    @appearance = user.appearances.find(params[:id])
-    @appearance.destroy
-
-    redirect_to :action => :index
+  def edit
+    @appearance = Appearance.find(params[:appearance_id])
+    raise "Illigal Key" unless params[:key] == @appearance.key
   end
 
-private
-  def user
-    unless @user
-      @user = User.where(:screen_name => params[:screen_name]).first
-      raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
+  def update
+    @appearance = Appearance.find(params[:id])
+    if @appearance.update(params[:appearance])
+      redirect_to appearance_path(@appearance)
+    else
+      render :action => "edit"
     end
-    return @user
   end
 end

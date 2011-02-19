@@ -1,5 +1,11 @@
-%p 
-  = link_to(image_tag("http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png",
-                      :alt => 'Sign in with twitter'),
-            login_path)
-  からサインインできますが工事中なので、まだ何もありません。
+#main_content
+  #main_section_wrap
+    %section#main_section
+      %p
+        工事中です。まだ素材が何もないです。
+      %ul
+        %li
+          = link_to(image_tag("http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png",
+                              :alt => 'Sign in with twitter'),
+                              login_path)
+          = link_to 'New Appearance', new_appearance_path

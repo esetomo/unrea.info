@@ -6,4 +6,5 @@
       %article
         = image_tag url_for(:format => :jpg)      
       %footer
-        = link_to 'Index', appearances_path
+        = link_to 'Index', user_appearances_path(@user)
+  = render :partial => 'users/sidebar'

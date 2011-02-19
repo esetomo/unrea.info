@@ -32,6 +32,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_user_match
+    unless current_user == user
+      redirect_to root_url
+      return false
+    end
+  end
+
   def current_user
     return nil unless session[:token]
     @current_user ||= User.where(:session_token => session[:token]).first

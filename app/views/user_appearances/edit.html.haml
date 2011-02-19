@@ -1,0 +1,10 @@
+#main_content
+  #main_section_wrap
+    %section#main_section
+      %header
+        %h1 Edit Appearance
+      = image_tag(user_appearance_path(@user, @appearance, :format => :jpg))
+      = form_for @appearance, :url => user_appearance_path(@user, @appearance) do |f|
+        = f.text_field :image
+        = f.submit
+  = render :partial => 'users/sidebar'

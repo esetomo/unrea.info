@@ -36,9 +36,9 @@ class UsersController < ApplicationController
   end
 
   def logout
-    session[:token] = nil
     current_user.session_token = nil
     current_user.save!
+    session[:token] = nil
     redirect_to root_path
   end
 
