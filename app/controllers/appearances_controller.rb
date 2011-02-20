@@ -7,7 +7,7 @@ class AppearancesController < ApplicationController
     @appearance = Appearance.find(params[:id])
     respond_to do |format|
       format.html 
-      format.jpg { send_data(@appearance.image, :type => 'image/jpg') }
+      format.jpg { send_data(@appearance.image, :type => 'image/jpeg') }
     end
   end
 
