@@ -1,7 +1,8 @@
 class Wear
   include Mongoid::Document
+  include Mongoid::Timestamps
 
-  embedded_in :appearance, :inverse_of => :wears
+  referenced_in :appearance, :inverse_of => :wears
   referenced_in :item, :inverse_of => :wears
 
   def image

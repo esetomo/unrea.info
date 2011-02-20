@@ -3,7 +3,7 @@ class Appearance
   include Mongoid::Timestamps
 
   field :key, :type => String
-  embeds_many :wears
+  references_many :wears
 
   referenced_in :user, :inverse_of => :appearances
 
@@ -16,20 +16,24 @@ class Appearance
   end
 
   def has_item(item)
-    wears.any?{|wear| wear.item_id == item.id}
+    !! wears.where(:item_id => item.id).first
   end
 
   def render
+    if Rails.env == 'test'
+      self.image = "dummy"
+      return
+    end
+
     work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
     work_dir.mkdir
+
+    open(work_dir.join("Camera.tga"), "w") do |w|
+    end      
     
-    open(work_dir.join('Camera.tga'), "w") do |w|
-    end
-
-    open(work_dir.join('Lamp.tga'), "w") do |w|
-    end
-
-    open(work_dir.join('Cube.tga'), "w") do |w|
+    wears.each do |wear|
+      open(work_dir.join("#{wear.item.name}.tga"), "w") do |w|
+      end      
     end
 
     ENV['WORK_DIR'] = work_dir.to_s

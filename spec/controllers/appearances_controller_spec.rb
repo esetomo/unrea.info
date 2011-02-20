@@ -5,6 +5,10 @@ describe AppearancesController do
     @mock_appearance ||= mock_model(Appearance, stubs).as_null_object
   end
 
+  def mock_item(stubs={})
+    @mock_item ||= mock_model(Item, stubs).as_null_object
+  end
+
   describe "GET show" do
     it "should be success" do
       Appearance.stub(:find).with("123"){ mock_appearance }
@@ -32,6 +36,7 @@ describe AppearancesController do
   describe "POST add_item" do
     it "should be success" do
       Appearance.stub(:find).with("123"){ mock_appearance }
+      Item.stub(:find).with("456"){ mock_item }
       post :add_item, :id => "123", :item_id => "456"
       response.should be_success
     end
@@ -40,6 +45,7 @@ describe AppearancesController do
   describe "POST remove_item" do
     it "should be success" do
       Appearance.stub(:find).with("123"){ mock_appearance }
+      Item.stub(:find).with("456"){ mock_item }
       post :remove_item, :id => "123", :item_id => "456"
       response.should be_success
     end

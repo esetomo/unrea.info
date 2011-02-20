@@ -35,17 +35,19 @@ class AppearancesController < ApplicationController
 
   def add_item
     @appearance = Appearance.find(params[:id])
-    @appearance.wears.create(:item_id => params[:item_id])
+    @item = Item.find(params[:item_id])
+    @appearance.wears.create(:item => @item)
     render :update do |page|
-      page['#editor'].html render('editor.html.haml')
+      page["#item_#{@item.name}"].html render(:partial => 'item.html.haml', :locals => {:item => @item})
     end
   end
 
   def remove_item
     @appearance = Appearance.find(params[:id])
-    @appearance.wears.destroy_all(:conditions => {:item_id => params[:item_id]})
+    @item = Item.find(params[:item_id])
+    @appearance.wears.destroy_all(:conditions => {:item_id => @item.id})
     render :update do |page|
-      page['#editor'].html render('editor.html.haml')
+      page["#item_#{@item.name}"].html render(:partial => 'item.html.haml', :locals => {:item => @item})
     end
   end
 
@@ -54,7 +56,7 @@ class AppearancesController < ApplicationController
     @appearance.render
     @appearance.save!
     render :update do |page|
-      page['#editor'].html render('editor.html.haml')
+      page['#appearance_image'].attr 'src', appearance_path(@appearance, :format => :jpg, :t => Time.now.to_i)
     end    
   end
 end
