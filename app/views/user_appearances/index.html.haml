@@ -5,7 +5,7 @@
         %h1 Appearances
       - @appearances.each do |appearance|
         %article
-          = image_tag(user_appearance_path(@user, appearance, :format => :jpg))
+          = image_tag(user_appearance_path(@user, appearance, :format => :png))
           - if @user == current_user
             %aside
               = link_to('Edit', edit_user_appearance_path(@user, appearance), :method => :get)

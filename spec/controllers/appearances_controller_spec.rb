@@ -16,12 +16,12 @@ describe AppearancesController do
       response.should be_success
     end
 
-    describe "format jpeg" do
-      it "should be image/jpeg" do
+    describe "format png" do
+      it "should be image/png" do
         Appearance.stub(:find).with("123"){ mock_appearance }
-        get :show, :id => "123", :format => 'jpg'
+        get :show, :id => "123", :format => 'png'
         response.should be_success
-        response.content_type.should == "image/jpeg"
+        response.content_type.should == "image/png"
       end
     end
   end

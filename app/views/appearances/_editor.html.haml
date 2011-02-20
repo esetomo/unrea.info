@@ -1,5 +1,5 @@
 #editor
-  = image_tag(appearance_path(@appearance, :format => :jpg), :id => 'appearance_image')
+  = image_tag(appearance_path(@appearance, :format => :png), :id => 'appearance_image')
   %ul
     - Item.all.each do |item|
       = render :partial => 'item', :locals => {:item => item}

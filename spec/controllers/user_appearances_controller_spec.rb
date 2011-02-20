@@ -24,12 +24,12 @@ describe UserAppearancesController do
       response.should be_success
     end
 
-    describe "format jpeg" do
-      it "should be image/jpeg" do
+    describe "format png" do
+      it "should be image/png" do
         User.stub(:where).with(:screen_name => "test_user") { [mock_user] }
-        get :show, :screen_name => 'test_user', :id => 123, :format => 'jpg'
+        get :show, :screen_name => 'test_user', :id => 123, :format => 'png'
         response.should be_success
-        response.content_type.should == "image/jpeg"
+        response.content_type.should == "image/png"
       end
     end
   end

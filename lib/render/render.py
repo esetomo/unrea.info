@@ -47,4 +47,4 @@ load_setting(os.environ['WORK_DIR'])
 
 bpy.ops.render.render()
 img = bpy.data.images['Render Result']
-img.save_render(os.environ['WORK_DIR'] + '/result.jpg')
+img.save_render(os.environ['WORK_DIR'] + '/result.png')

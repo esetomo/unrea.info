@@ -7,7 +7,7 @@ class AppearancesController < ApplicationController
     @appearance = Appearance.find(params[:id])
     respond_to do |format|
       format.html 
-      format.jpg { send_data(@appearance.image, :type => 'image/jpeg') }
+      format.png { send_data(@appearance.image, :type => 'image/png') }
     end
   end
 
@@ -56,7 +56,7 @@ class AppearancesController < ApplicationController
     @appearance.render
     @appearance.save!
     render :update do |page|
-      page['#appearance_image'].attr 'src', appearance_path(@appearance, :format => :jpg, :t => Time.now.to_i)
+      page['#appearance_image'].attr 'src', appearance_path(@appearance, :format => :png, :t => Time.now.to_i)
     end    
   end
 end

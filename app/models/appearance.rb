@@ -38,9 +38,13 @@ class Appearance
 
     ENV['WORK_DIR'] = work_dir.to_s
     render_script = Rails.root.join('lib', 'render', 'render.py')
-    system("/home/s-tomo/Applications/blender/blender -noaudio -b -P #{render_script}")
+    blender = "/home/s-tomo/Applications/blender/blender"
+    unless File.exists?(blender)
+      blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender"
+    end
+    system("#{blender} -noaudio -b -P #{render_script}")
     
-    open(work_dir.join('result.jpg'), "rb") do |r|
+    open(work_dir.join('result.png'), "rb") do |r|
       self.image = r.read
     end
 
