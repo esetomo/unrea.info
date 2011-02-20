@@ -34,7 +34,7 @@ class UserAppearancesController < ApplicationController
   def update
     @appearance = user.appearances.find(params[:id])
     if @appearance.update(params[:appearance])
-      redirect_to user_appearance_path(user, @appearance)
+      redirect_to user_appearance_path(user.screen_name, @appearance)
     else
       render :action => "edit"
     end
