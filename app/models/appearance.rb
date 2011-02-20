@@ -3,6 +3,7 @@ class Appearance
   include Mongoid::Timestamps
 
   field :key, :type => String
+  embeds_many :wears
 
   referenced_in :user, :inverse_of => :appearances
 
