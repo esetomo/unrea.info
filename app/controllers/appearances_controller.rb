@@ -16,11 +16,11 @@ class AppearancesController < ApplicationController
     @appearance.key = SecureRandom.base64(12)
     @appearance.render
     @appearance.save!
-    redirect_to appearance_edit_path(@appearance, @appearance.key)
+    redirect_to edit_appearance_path(@appearance, @appearance.key)
   end
 
   def edit
-    @appearance = Appearance.find(params[:appearance_id])
+    @appearance = Appearance.find(params[:id])
     raise "Illigal Key" unless params[:key] == @appearance.key
   end
 
@@ -31,5 +31,30 @@ class AppearancesController < ApplicationController
     else
       render :action => "edit"
     end
+  end
+
+  def add_item
+    @appearance = Appearance.find(params[:id])
+    @appearance.wears.create(:item_id => params[:item_id])
+    render :update do |page|
+      page['#editor'].html render('editor.html.haml')
+    end
+  end
+
+  def remove_item
+    @appearance = Appearance.find(params[:id])
+    @appearance.wears.destroy_all(:conditions => {:item_id => params[:item_id]})
+    render :update do |page|
+      page['#editor'].html render('editor.html.haml')
+    end
+  end
+
+  def render_image
+    @appearance = Appearance.find(params[:id])
+    @appearance.render
+    @appearance.save!
+    render :update do |page|
+      page['#editor'].html render('editor.html.haml')
+    end    
   end
 end

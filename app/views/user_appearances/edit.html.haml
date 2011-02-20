@@ -3,8 +3,5 @@
     %section#main_section
       %header
         %h1 Edit Appearance
-      = image_tag(user_appearance_path(@user, @appearance, :format => :jpg))
-      = form_for @appearance, :url => user_appearance_path(@user, @appearance) do |f|
-        = f.text_field :image
-        = f.submit
+      = render :partial => 'appearances/editor'      
   = render :partial => 'users/sidebar'

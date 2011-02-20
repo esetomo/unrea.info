@@ -1,0 +1,11 @@
+#editor
+  = image_tag(appearance_path(@appearance, :format => :jpg), :id => 'appearance_image')
+  %ul
+    - Item.all.each do |item|
+      %li
+        - if @appearance.has_item(item)
+          = button_to "Remove #{item.name}", remove_item_from_appearance_path(@appearance, item), :remote => true
+        - else
+          = button_to "Add #{item.name}", add_item_to_appearance_path(@appearance, item), :remote => true
+  = button_to "Rennder", render_appearance_path(@appearance), :remote => true
+

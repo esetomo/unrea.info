@@ -15,6 +15,10 @@ class Appearance
     self['image'] = BSON::Binary.new(value)
   end
 
+  def has_item(item)
+    wears.any?{|wear| wear.item_id == item.id}
+  end
+
   def render
     work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
     work_dir.mkdir

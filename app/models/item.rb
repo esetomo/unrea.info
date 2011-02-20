@@ -2,5 +2,8 @@ class Item
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  references_many :wares
+  field :kind, :type => String
+  field :name, :type => String
+
+  references_many :wears
 end

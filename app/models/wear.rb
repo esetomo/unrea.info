@@ -1,8 +1,6 @@
 class Wear
   include Mongoid::Document
 
-  field :model, :type => String
-  
   embedded_in :appearance, :inverse_of => :wears
   referenced_in :item, :inverse_of => :wears
 

@@ -40,5 +40,25 @@ describe AppearancesController do
                                                         :action => "destroy",
                                                         :id => "123")
     end
+
+    it "recognizes and generates #add_item" do
+      { :post => "/appearances/123/add_item/456" }.should route_to(:controller => "appearances",
+                                                                   :action => "add_item",
+                                                                   :id => "123",
+                                                                   :item_id => "456")
+    end
+
+    it "recognizes and generates #remove_item" do
+      { :post => "/appearances/123/remove_item/456" }.should route_to(:controller => "appearances",
+                                                                      :action => "remove_item",
+                                                                      :id => "123",
+                                                                      :item_id => "456")
+    end
+
+    it "recognizes and generates #render" do
+      { :post => "/appearances/123/render" }.should route_to(:controller => "appearances",
+                                                             :action => "render_image",
+                                                             :id => "123")
+    end
   end
 end

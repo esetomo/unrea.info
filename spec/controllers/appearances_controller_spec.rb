@@ -21,4 +21,35 @@ describe AppearancesController do
       end
     end
   end
+
+  describe "GET new" do
+    it "should be redirect to edit" do
+      get :new
+      response.should redirect_to(edit_appearance_path(assigns(:appearance), assigns(:appearance).key))
+    end
+  end
+
+  describe "POST add_item" do
+    it "should be success" do
+      Appearance.stub(:find).with("123"){ mock_appearance }
+      post :add_item, :id => "123", :item_id => "456"
+      response.should be_success
+    end
+  end
+
+  describe "POST remove_item" do
+    it "should be success" do
+      Appearance.stub(:find).with("123"){ mock_appearance }
+      post :remove_item, :id => "123", :item_id => "456"
+      response.should be_success
+    end
+  end
+
+  describe "POST render" do
+    it "should be success" do
+      Appearance.stub(:find).with("123"){ mock_appearance }
+      post :render_image, :id => "123"
+      response.should be_success
+    end
+  end
 end
