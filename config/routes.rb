@@ -17,7 +17,7 @@ Unrea::Application.routes.draw do
   end
 
   controller :appearances do
-    get "appearances/:command.jpg", :action => :image, :as => :appearance_image
+    get "appearances/:command.png", :action => :image, :as => :appearance_image
   end
 
   resources :appearances do

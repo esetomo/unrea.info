@@ -5,16 +5,15 @@ class AppearancesController < ApplicationController
 
   def show
     @appearance = Appearance.find(params[:id])
-    respond_to do |format|
-      format.html 
-      format.png { send_data(@appearance.image, :type => 'image/png') }
-    end
+  end
+
+  def image
+    send_data(Appearance.render_image(params[:command]), :type => 'image/png')
   end
 
   def new
     @appearance = Appearance.new
-    @appearance.key = SecureRandom.base64(12)
-    @appearance.render
+    @appearance.key = SecureRandom.hex(12)
     @appearance.save!
     redirect_to edit_appearance_path(@appearance, @appearance.key)
   end

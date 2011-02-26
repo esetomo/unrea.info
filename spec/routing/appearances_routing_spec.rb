@@ -56,7 +56,7 @@ describe AppearancesController do
     end
 
     it "recognizes and generates #image" do
-      { :get => "/appearances/foo_bar_baz.jpg" }.should route_to(:controller => "appearances",
+      { :get => "/appearances/foo_bar_baz.png" }.should route_to(:controller => "appearances",
                                                                  :action => "image",
                                                                  :command => "foo_bar_baz")
     end

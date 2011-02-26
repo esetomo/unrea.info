@@ -15,15 +15,6 @@ describe AppearancesController do
       get :show, :id => "123"
       response.should be_success
     end
-
-    describe "format png" do
-      it "should be image/png" do
-        Appearance.stub(:find).with("123"){ mock_appearance }
-        get :show, :id => "123", :format => 'png'
-        response.should be_success
-        response.content_type.should == "image/png"
-      end
-    end
   end
 
   describe "GET new" do
@@ -51,11 +42,11 @@ describe AppearancesController do
     end
   end
 
-  describe "POST render" do
-    it "should be success" do
-      Appearance.stub(:find).with("123"){ mock_appearance }
-      post :render_image, :id => "123"
+  describe "GET image" do
+    it "should be image/png" do
+      get :image, :command => "foo", :format => 'png'
       response.should be_success
+      response.content_type.should == "image/png"
     end
   end
 end

@@ -7,22 +7,13 @@ class Appearance
 
   referenced_in :user, :inverse_of => :appearances
 
-  def image
-    self['image']
-  end
-
-  def image=(value)
-    self['image'] = BSON::Binary.new(value)
-  end
-
   def has_item(item)
     !! wears.where(:item_id => item.id).first
   end
 
-  def render
+  def self.render_image(command)
     if Rails.env == 'test'
-      self.image = "dummy"
-      return
+      return "dummy"
     end
 
     work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
@@ -45,9 +36,11 @@ class Appearance
     system("#{blender} -noaudio -b -P #{render_script}")
     
     open(work_dir.join('result.png'), "rb") do |r|
-      self.image = r.read
+      result = r.read
     end
 
     work_dir.rmtree    
+
+    return result
   end
 end
