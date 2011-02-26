@@ -16,9 +16,7 @@ Unrea::Application.routes.draw do
     delete 'u/:screen_name/a/:id', :action => :destroy
   end
 
-  controller :appearances do
-    get "appearances/:command.png", :action => :image, :as => :appearance_image
-  end
+  get "i/:command", :to => "images#show", :as => :image
 
   resources :appearances do
     member do

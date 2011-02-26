@@ -41,12 +41,4 @@ describe AppearancesController do
       response.should be_success
     end
   end
-
-  describe "GET image" do
-    it "should be image/png" do
-      get :image, :command => "foo", :format => 'png'
-      response.should be_success
-      response.content_type.should == "image/png"
-    end
-  end
 end

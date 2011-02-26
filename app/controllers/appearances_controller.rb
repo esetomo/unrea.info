@@ -7,10 +7,6 @@ class AppearancesController < ApplicationController
     @appearance = Appearance.find(params[:id])
   end
 
-  def image
-    send_data(Appearance.render_image(params[:command]), :type => 'image/png')
-  end
-
   def new
     @appearance = Appearance.new
     @appearance.key = SecureRandom.hex(12)
