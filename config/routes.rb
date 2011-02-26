@@ -16,12 +16,15 @@ Unrea::Application.routes.draw do
     delete 'u/:screen_name/a/:id', :action => :destroy
   end
 
+  controller :appearances do
+    get "appearances/:command.jpg", :action => :image, :as => :appearance_image
+  end
+
   resources :appearances do
     member do
       get 'edit/:key', :action => :edit, :as => :edit
       post 'add_item/:item_id', :action => :add_item, :as => :add_item_to
       post "remove_item/:item_id", :action => :remove_item, :as => :remove_item_from
-      post "render", :action => :render_image, :as => :render
     end
   end
 
