@@ -40,11 +40,12 @@ class Image
 
     ENV['WORK_DIR'] = work_dir.to_s
     render_script = Rails.root.join('lib', 'render', 'render.py')
+    src = Rails.root.join('lib', 'render', 'lib1.blend')
     blender = "/home/s-tomo/Applications/blender/blender"
     unless File.exists?(blender)
       blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender"
     end
-    system("#{blender} -noaudio -b -P #{render_script}")
+    system("#{blender} -noaudio -b -P #{render_script} #{src}")
     
     open(work_dir.join('result.png'), "rb") do |r|
       self.data = r.read

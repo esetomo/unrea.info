@@ -11,7 +11,6 @@ class UserAppearancesController < ApplicationController
 
   def new
     @appearance = user.appearances.new
-    @appearance.render
     @appearance.save!
     redirect_to :action => :edit, :id => @appearance.id
   end
