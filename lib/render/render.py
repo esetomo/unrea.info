@@ -10,6 +10,7 @@ def setup_scene():
     scene.render.resolution_x = 320
     scene.render.resolution_y = 240
     scene.render.resolution_percentage = 100
+    scene.layers[0] = True
 
 def set_texture(obj, file):
     mat = obj.active_material
@@ -25,6 +26,7 @@ def load_setting(dir):
             continue
         name = file[0:len(file) - 4]
         obj = bpy.data.objects[name]
+        obj.layers[0] = True
         bpy.context.scene.objects.link(obj)
         if obj.type == 'MESH':
             set_texture(obj, dir + "/" + file)        
