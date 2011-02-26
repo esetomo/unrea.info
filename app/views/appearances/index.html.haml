@@ -5,4 +5,4 @@
         %h1 Appearances
       - @appearances.each do |appearance|
         %article
-          = image_tag(appearance_path(appearance, :format => :png))
+          = image_tag(appearance.image_path)

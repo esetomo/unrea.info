@@ -1,6 +1,7 @@
 class Appearance
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActionController::UrlWriter
 
   field :key, :type => String
   references_many :wears
@@ -11,7 +12,11 @@ class Appearance
     !! wears.where(:item_id => item.id).first
   end
 
-  def self.render_image(command)
+  def image_path
+    appearance_image_path('_' + wears.map{|wear| wear.to_command }.join('_'))
+  end
+
+  def self.render_image(arg)
     if Rails.env == 'test'
       return "dummy"
     end
@@ -22,9 +27,13 @@ class Appearance
     open(work_dir.join("Camera.tga"), "w") do |w|
     end      
     
-    wears.each do |wear|
-      open(work_dir.join("#{wear.item.name}.tga"), "w") do |w|
-      end      
+    commands = arg.split(/_/)
+    commands.each do |command|
+      case command
+      when /A(.+)/
+        open(work_dir.join("#{$1}.tga"), "w") do |w|
+        end      
+      end
     end
 
     ENV['WORK_DIR'] = work_dir.to_s
@@ -35,6 +44,7 @@ class Appearance
     end
     system("#{blender} -noaudio -b -P #{render_script}")
     
+    result = nil
     open(work_dir.join('result.png'), "rb") do |r|
       result = r.read
     end

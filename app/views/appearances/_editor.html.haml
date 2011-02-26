@@ -1,9 +1,5 @@
 #editor
-  = image_tag(appearance_path(@appearance, :format => :png), :id => 'appearance_image')
+  = image_tag(@appearance.image_path, :id => 'appearance_image')
   %ul
     - Item.all.each do |item|
-      = render :partial => 'item', :locals => {:item => item}
-  = button_to('Render', 
-              render_appearance_path(@appearance), 
-              :remote => true, 
-              :onclick => "$('#appearance_image').attr('src', '/images/loading.gif')")
+      = render :partial => 'appearances/item', :locals => {:item => item}

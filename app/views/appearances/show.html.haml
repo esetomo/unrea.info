@@ -4,6 +4,6 @@
       %header
         %h1 Appearance
       %article
-        = image_tag url_for(:format => :png)      
+        = image_tag @appearance.image_path
       %footer
         = link_to 'Index', appearances_path

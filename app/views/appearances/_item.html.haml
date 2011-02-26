@@ -1,5 +1,11 @@
 %li{:id => "item_#{item.name}"}
   - if @appearance.has_item(item)
-    = button_to "Remove #{item.name}", remove_item_from_appearance_path(@appearance, item), :remote => true
+    = button_to("Remove #{item.name}", 
+                remove_item_from_appearance_path(@appearance, item), 
+                :remote => true,
+                :onclick => "$('#appearance_image').attr('src', '/images/loading.gif')")
   - else
-    = button_to "Add #{item.name}", add_item_to_appearance_path(@appearance, item), :remote => true
+    = button_to("Add #{item.name}",
+                add_item_to_appearance_path(@appearance, item), 
+                :remote => true,
+                :onclick => "$('#appearance_image').attr('src', '/images/loading.gif')")

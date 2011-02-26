@@ -5,11 +5,7 @@ class Wear
   referenced_in :appearance, :inverse_of => :wears
   referenced_in :item, :inverse_of => :wears
 
-  def image
-    self['image']
-  end
-
-  def image=(value)
-    self['image'] = BSON::Binary.new(value)
+  def to_command
+    "A#{item.name}"
   end
 end

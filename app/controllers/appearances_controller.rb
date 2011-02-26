@@ -38,6 +38,7 @@ class AppearancesController < ApplicationController
     @appearance.wears.create(:item => @item)
     render :update do |page|
       page["#item_#{@item.name}"].html render(:partial => 'item.html.haml', :locals => {:item => @item})
+      page['#appearance_image'].attr 'src', @appearance.image_path
     end
   end
 
@@ -47,15 +48,7 @@ class AppearancesController < ApplicationController
     @appearance.wears.destroy_all(:conditions => {:item_id => @item.id})
     render :update do |page|
       page["#item_#{@item.name}"].html render(:partial => 'item.html.haml', :locals => {:item => @item})
+      page['#appearance_image'].attr 'src', @appearance.image_path
     end
-  end
-
-  def render_image
-    @appearance = Appearance.find(params[:id])
-    @appearance.render
-    @appearance.save!
-    render :update do |page|
-      page['#appearance_image'].attr 'src', appearance_path(@appearance, :format => :png, :t => Time.now.to_i)
-    end    
   end
 end
