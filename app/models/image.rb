@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Image
   include Mongoid::Document
   field :command, :type => String
@@ -39,9 +40,9 @@ class Image
     end
 
     ENV['WORK_DIR'] = work_dir.to_s
-    render_script = Rails.root.join('lib', 'render', 'render.py')
-    quit_script = Rails.root.join('lib', 'render', 'quit.py')
-    src = Rails.root.join('lib', 'render', 'lib1.blend')
+    render_script = Rails.root.join('lib', 'render', 'render.py').to_s
+    quit_script = Rails.root.join('lib', 'render', 'quit.py').to_s
+    src = Rails.root.join('lib', 'render', 'lib1.blend').to_s
     
     blender = "/home/s-tomo/Applications/blender/blender"
     blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender" unless File.exists?(blender)
@@ -49,7 +50,7 @@ class Image
 
     case RUBY_PLATFORM
     when /mswin(?!ce)|mingw|cygwin|bccwin/
-      # Windows‚Å‚Íbatchƒ‚[ƒh‚¾‚Æbpyƒ‚ƒWƒ…[ƒ‹‚ª‚¤‚Ü‚­“Ç‚İ‚Ü‚ê‚È‚¢—lq
+      # Windowsã§ã¯batchãƒ¢ãƒ¼ãƒ‰ã ã¨bpyãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãŒã†ã¾ãèª­ã¿è¾¼ã¾ã‚Œãªã„æ§˜å­
       system(blender, "-P", render_script, "-P", quit_script, src)
     else
       system(blender, "-noaudio", "-b", "-P", render_script, src)
