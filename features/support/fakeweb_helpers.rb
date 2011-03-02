@@ -20,9 +20,11 @@ module FakewebHelpers
     FakeWeb.register_uri(:post, url, :response => fixture_file(filename))
   end
 
+=begin
   def stub_any(url, filename)
     FakeWeb.register_uri(:any, url, :response => fixture_file(filename))
   end
+=end
 end
 
 World(FakewebHelpers)

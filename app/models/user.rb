@@ -17,9 +17,11 @@ class User
   validates_uniqueness_of :twitter_id
   validates_uniqueness_of :screen_name
 
+=begin
   def to_key
     [screen_name]
   end
+=end
 
   def twitter
     unless @twitter

@@ -21,8 +21,6 @@ class Image
   end
 
   def render(arg)
-    return if Rails.env == 'test'
-
     work_dir = Rails.root.join('tmp', UUIDTools::UUID.timestamp_create.to_s)
     work_dir.mkdir
 

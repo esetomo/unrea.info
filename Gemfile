@@ -40,6 +40,7 @@ group :test do
   gem 'database_cleaner'
   gem 'fakeweb'
   gem 'net-http-spy'
+  gem 'rcov'
 end
 
 group :test, :development do

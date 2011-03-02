@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+=begin
   def require_admin
     unless admin?
       render(:file => "#{Rails.root}/public/404.html", 
@@ -31,6 +32,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+=end
 
   def require_user_match
     unless current_user == user
@@ -44,18 +46,22 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.where(:session_token => session[:token]).first
   end
 
+=begin
   def admin?
     current_user && current_user.twitter_id == "54895358" # @15my
   end
+=end
 
   def store_location
     session[:return_to] = request.fullpath
   end
 
+=begin
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
+=end
 
   def set_locale
     I18n.locale = params[:locale]

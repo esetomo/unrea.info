@@ -13,4 +13,9 @@ describe Appearance do
   it "image path should /i/_.png" do
     @appearance.image_path.should == "/i/_.png"
   end
+
+  it "not has item" do
+    @item = Factory(:item)
+    @appearance.has_item(@item).should be(false)
+  end
 end

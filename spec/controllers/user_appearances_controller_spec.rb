@@ -87,6 +87,30 @@ describe UserAppearancesController do
         put :update, :screen_name => 'test_user', :id => "123"
         response.should redirect_to(user_appearance_path("test_user", mock_appearance))
       end
+
+      describe "with illigal params" do
+        it "should return to form" do
+          session[:token] = 'test_token'
+          User.stub(:where).with(:session_token => "test_token") { [mock_user] }
+          User.stub(:where).with(:screen_name => "test_user"){[mock_user]}
+          mock_user(:screen_name => "test_user").appearances.stub(:find).with("123"){ mock_appearance(:update => false) }
+          
+          put :update, :screen_name => 'test_user', :id => "123"
+          response.should be_success
+          response.should render_template("edit")
+        end
+      end
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should be redirect to index" do
+      session[:token] = 'test_token'
+      User.stub(:where).with(:session_token => "test_token"){[mock_user]}
+      User.stub(:where).with(:screen_name => "test_user"){[mock_user]}
+      mock_user.appearances.stub(:find).with("123"){mock_appearance}
+      delete :destroy, :screen_name => 'test_user', :id => '123'
+      response.should redirect_to(user_appearances_path("test_user"))
     end
   end
 end

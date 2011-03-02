@@ -32,14 +32,31 @@ describe UsersController do
       get :login
       response.should be_redirect
     end
+
+    describe "with logined" do
+      it "redirect to root_path" do
+        controller.session[:token] = 'dummy token'
+        User.stub(:where).with(:session_token => 'dummy token'){[mock_user]}
+        get :login
+        response.should redirect_to(root_path)
+      end
+    end
   end
 
   describe "GET logout" do
-    it "redirect to root url" do
-      controller.session[:token] = 'dummy token'
+    it "redirect to root path" do
       get :logout
       response.should redirect_to(root_path)
-      # controller.session[:token].should be_nil
+    end
+
+    describe "with logined" do
+      it "redirect to root url" do
+        controller.session[:token] = 'dummy token'
+        User.stub(:where).with(:session_token => 'dummy token'){[mock_user]}     
+        get :logout
+        response.should redirect_to(root_path)
+        controller.session[:token].should be_nil
+      end
     end
   end
 
