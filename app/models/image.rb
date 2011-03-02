@@ -4,11 +4,17 @@ class Image
   field :command, :type => String
 
   def data
-    self['data']
+    fs = Mongo::GridFileSystem.new(db)
+    fs.open("#{command}.png", "r"){|f| f.read}
   end
 
   def data=(value)
-    self['data'] = BSON::Binary.new(value)
+    fs = Mongo::GridFileSystem.new(db)
+    fs.open("#{command}.png", "w",
+            :delete_old => true,
+            :content_type => 'image/png') do |f|
+      f.write(value)
+    end
   end
 
   def self.render(command)
