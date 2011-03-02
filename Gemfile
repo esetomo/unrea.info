@@ -2,12 +2,11 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-gem 'pg'
 
 gem 'rails3-generators'
 gem 'jquery-rails'
 gem 'i18n_generators'
-gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
+gem 'will_paginate', '>= 3.0.pre' # :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'bson_ext'
 gem 'mongoid', '>= 2.0.0.rc'
 
@@ -52,3 +51,7 @@ when /^1\.9/
   gem 'test-unit', '1.2.3'
 end
 
+case RUBY_PLATFORM
+when /mswin(?!ce)|mingw|cygwin|bccwin/
+  gem 'win32console'
+end

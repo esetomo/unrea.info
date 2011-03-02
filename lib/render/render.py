@@ -2,25 +2,15 @@ import bpy.ops
 import os
 
 def clear_objects():
-    for obj in bpy.data.objects:
-        for scene in obj.users_scene:
-            scene.objects.unlink(obj)
-        for group in obj.users_group:
-            group.objects.unlink(obj)
-        bpy.data.objects.remove(obj)
-    assert len(bpy.data.objects) == 0
+    for obj in bpy.context.scene.objects:
+        bpy.context.scene.objects.unlink(obj)
 
 def setup_scene():
     scene = bpy.context.scene
     scene.render.resolution_x = 320
     scene.render.resolution_y = 240
     scene.render.resolution_percentage = 100
-
-def load_object(name):
-    bpy.ops.wm.link_append(link=False,
-                           filename=name, 
-                           directory=os.path.dirname(__file__) + "/lib1.blend/Object/")
-    return bpy.data.objects[name]
+    scene.layers[0] = True
 
 def set_texture(obj, file):
     mat = obj.active_material
@@ -35,7 +25,9 @@ def load_setting(dir):
         if not(file.endswith(".tga")):
             continue
         name = file[0:len(file) - 4]
-        obj = load_object(name)
+        obj = bpy.data.objects[name]
+        obj.layers[0] = True
+        bpy.context.scene.objects.link(obj)
         if obj.type == 'MESH':
             set_texture(obj, dir + "/" + file)        
         if obj.type == 'CAMERA':

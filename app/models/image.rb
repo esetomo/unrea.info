@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Image
   include Mongoid::Document
   field :command, :type => String
@@ -37,12 +38,21 @@ class Image
     end
 
     ENV['WORK_DIR'] = work_dir.to_s
-    render_script = Rails.root.join('lib', 'render', 'render.py')
+    render_script = Rails.root.join('lib', 'render', 'render.py').to_s
+    quit_script = Rails.root.join('lib', 'render', 'quit.py').to_s
+    src = Rails.root.join('lib', 'render', 'lib1.blend').to_s
+    
     blender = "/home/s-tomo/Applications/blender/blender"
-    unless File.exists?(blender)
-      blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender"
+    blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender" unless File.exists?(blender)
+    blender = 'D:/Users/s-tomo/Blender Foundation/Blender/blender.exe' unless File.exists?(blender)
+
+    case RUBY_PLATFORM
+    when /mswin(?!ce)|mingw|cygwin|bccwin/
+      # Windowsではbatchモードだとbpyモジュールがうまく読み込まれない様子
+      system(blender, "-P", render_script, "-P", quit_script, src)
+    else
+      system(blender, "-noaudio", "-b", "-P", render_script, src)
     end
-    system("#{blender} -noaudio -b -P #{render_script}")
     
     open(work_dir.join('result.png'), "rb") do |r|
       self.data = r.read
