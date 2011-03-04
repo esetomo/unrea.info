@@ -116,6 +116,7 @@ GEM
     nokogiri (1.4.4-x86-mingw32)
     oauth (0.4.4)
     polyglot (0.3.1)
+    proxies (0.2.1)
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
@@ -168,6 +169,8 @@ GEM
       rspec (~> 2.5.0)
     ruby-graphviz (0.9.20)
     rubyzip (0.9.4)
+    s3 (0.3.7)
+      proxies
     selenium-webdriver (0.1.2)
       childprocess (~> 0.1.5)
       ffi (~> 0.6.3)
@@ -228,6 +231,7 @@ DEPENDENCIES
   rspec
   rspec-integration
   rspec-rails
+  s3
   spork
   test-unit (= 1.2.3)
   twitter

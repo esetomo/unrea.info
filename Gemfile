@@ -16,6 +16,7 @@ gem 'haml-rails'
 gem 'oauth'
 gem 'twitter'
 gem 'uuidtools'
+gem 's3'
 
 group :development do
   gem "rails-erd"
