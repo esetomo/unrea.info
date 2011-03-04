@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def show
     @user = User.where(:screen_name => params[:screen_name]).first
     raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
-    redirect_to user_appearances_path(@user)
+    redirect_to user_appearances_path(@user.screen_name)
   end
 
 private

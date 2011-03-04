@@ -49,6 +49,7 @@ class Image
     src = Rails.root.join('lib', 'render', 'lib1.blend').to_s
     
     blender = "/home/s-tomo/Applications/blender/blender"
+    blender = "/home/ubuntu/Applications/blender/blender" unless File.exists?(blender)
     blender = "/Users/esetomo/Downloads/blender-2/blender.app/Contents/MacOS/blender" unless File.exists?(blender)
     blender = 'D:/Users/s-tomo/Blender Foundation/Blender/blender.exe' unless File.exists?(blender)
 
