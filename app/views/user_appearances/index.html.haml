@@ -8,8 +8,8 @@
           = image_tag(appearance.image_path)
           - if @user == current_user
             %aside
-              = link_to('Edit', edit_user_appearance_path(@user, appearance), :method => :get)
-              = link_to('Delete', user_appearance_path(@user, appearance), :method => :delete)
+              = link_to('Edit', edit_user_appearance_path(@user.screen_name, appearance), :method => :get)
+              = link_to('Delete', user_appearance_path(@user.screen_name, appearance), :method => :delete)
       %footer
         - if @user == current_user
           = link_to('New Appearance', new_user_appearance_path(@user.screen_name))

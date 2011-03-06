@@ -38,7 +38,7 @@ private
   def user
     unless @user
       @user = User.where(:screen_name => params[:screen_name]).first
-      raise ActiveRecord::RecordNotFound.new("User not found with screen name #{params[:screen_name]}") unless @user
+      raise "User not found with screen name #{params[:screen_name]}" unless @user
     end
     return @user
   end
