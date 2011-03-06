@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   def show
-    @image = Image.render(params[:command])
-    send_data(@image.data, :type => 'image/png', :disposition => 'inline')
+    Image.render(params[:command])
+    redirect_to "http://unrea.s3.amazonaws.com/#{params[:command]}.png"
   end
 end

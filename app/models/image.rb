@@ -3,28 +3,20 @@ class Image
   include Mongoid::Document
   field :command, :type => String
 
-  def data
-    fs = Mongo::GridFileSystem.new(db)
-    fs.open("#{command}.png", "r"){|f| f.read}
-  end
-
   def data=(value)
-    fs = Mongo::GridFileSystem.new(db)
-    fs.open("#{command}.png", "w",
-            :delete_old => true,
-            :content_type => 'image/png') do |f|
-      f.write(value)
-    end
+    obj = $bucket.objects.build("#{command}.png")
+    obj.content = value
+    obj.content_type = 'image/png'
+    obj.save
   end
 
   def self.render(command)
-    image = where(:command => command).first
-    return image if image
-
-    image = new(:command => command)
-    image.render(command)
-    image.save!
-    return image
+    begin
+      $bucket.objects.find("#{command}.png")
+    rescue S3::Error::NoSuchKey
+      image = new(:command => command)
+      image.render(command)
+    end
   end
 
   def render(arg)
