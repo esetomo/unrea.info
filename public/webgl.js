@@ -78,62 +78,89 @@ function setMatrixUniforms(){
     gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 }
 
-var triangleVertexPositionBuffer;
-var squareVettexPositionBuffer;
+var ichigoVertexPositionBuffer;
+var ichigoVertexIndexBuffer;
 
-function initBuffers(){
-    triangleVertexPositionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
-    var vertices = [
-	0.0, 1.0, 0.0,
-	-1.0, -1.0, 0.0,
-	1.0, -1.0, 0.0
-    ];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    triangleVertexPositionBuffer.itemSize = 3;
-    triangleVertexPositionBuffer.numItems = 3;
+function initBuffers(skin_control){
+    var positions = $(skin_control).find('MeshGeometry3D\\.Positions')[0];
+    var points = $(positions).find('Point3D');
+    var indices = $(skin_control).find('MeshGeometry3D\\.TriangleIndices').text().split(/[\,\n]/);
+    indices.shift();
 
-    squareVertexPositionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
-    vertices = [
-	1.0, 1.0, 0.0,
-	-1.0, 1.0, 0.0,
-	1.0, -1.0, 0.0,
-       -1.0, -1.0, 0.0
-    ];
+    ichigoVertexPositionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, ichigoVertexPositionBuffer);
+
+    var vertices = points.map(function(){
+	return [this.getAttribute('X'),
+		this.getAttribute('Y'),
+		this.getAttribute('Z')];
+    });
+
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    squareVertexPositionBuffer.itemSize = 3;
-    squareVertexPositionBuffer.numItems = 4;
+    ichigoVertexPositionBuffer.itemSize = 3;
+    ichigoVertexPositionBuffer.numItems = points.length;
+
+    ichigoVertexIndexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ichigoVertexIndexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Int16Array(indices), gl.STATIC_DRAW);
+    ichigoVertexIndexBuffer.itemSize = 3;
+    ichigoVertexIndexBuffer.numItems = indices.length;
 }
+
+var r = 0;
 
 function drawScene(){
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 10.0, 10000.0, pMatrix);
+
     mat4.identity(mvMatrix);
+    mat4.rotate(mvMatrix, -Math.PI/2, [1, 0, 0]);
+    mat4.translate(mvMatrix, [0.0, 200.0, -70.0]);
 
-    mat4.translate(mvMatrix, [-1.5, 0.0, -7.0]);
-    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    setMatrixUniforms();
-    gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
+    mat4.rotate(mvMatrix, r, [0, 0, 1]);
 
-    mat4.translate(mvMatrix, [3.0, 0.0, 0.0]);
-    gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, squareVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    setMatrixUniforms();
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, squareVertexPositionBuffer.numItems);
+    gl.bindBuffer(gl.ARRAY_BUFFER, ichigoVertexPositionBuffer);
+    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, ichigoVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ichigoVertexIndexBuffer);
+    setMatrixUniforms();  
+    // gl.drawArrays(gl.TRIANGLES, 0, ichigoVertexPositionBuffer.numItems);
+    gl.drawElements(gl.TRIANGLES, ichigoVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+}
+
+var lastTime = 0;
+
+function animate(){
+    var timeNow = new Date().getTime();
+    if(lastTime != 0){
+	var elapsed = timeNow - lastTime;
+	r += (Math.PI * elapsed) / 2000.0;
+    }
+    lastTime = timeNow;
+}
+
+function tick(){
+    requestAnimFrame(tick);
+    drawScene();
+    animate();
 }
 
 $(document).ready(function(){
-    var canvas = $('#mycanvas')[0];
-    initGL(canvas);
-    initShaders();
-    initBuffers();
+    $.ajax({
+	url:'ichigo.xml',
+	success:function(xml){
+	    var skin_control = $(xml).find('[Name="skinControl"]')[0];
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.enable(gl.DEPTH_TEST);
-    
-    drawScene();
+	    var canvas = $('#mycanvas')[0];
+	    initGL(canvas);
+	    initShaders();
+	    initBuffers(skin_control);
+	    
+	    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	    gl.enable(gl.DEPTH_TEST);
+	    
+	    tick();
+	}
+    });
 });
