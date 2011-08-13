@@ -7,9 +7,9 @@
         = link_to 'Home', root_path
       - unless current_user
         %li
-          = link_to(image_tag("http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png",
-                              :alt => 'Sign in with twitter'),
-                    login_path)
+          //= link_to(image_tag("http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png",
+          //                    :alt => 'Sign in with twitter'),
+          //          login_path)
       - if current_user
         %li        
           = link_to '[Logout]', logout_path

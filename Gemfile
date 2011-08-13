@@ -17,6 +17,7 @@ gem 'oauth'
 gem 'twitter'
 gem 'uuidtools'
 gem 's3'
+gem 'unicorn'
 
 group :development do
   gem "rails-erd"
