@@ -1,0 +1,27 @@
+[submodule "lokka-facebook_like_button"]
+    path = public/plugin/lokka-facebook_like_button
+    url = git://github.com/champierre/lokka-facebook_like_button.git
+[submodule "lokka-fotolife_uploader"]
+    path = public/plugin/lokka-fotolife_uploader
+    url = https://github.com/nkmrshn/lokka-fotolife_uploader.git
+[submodule "lokka-gravatar_image"]
+    path = public/plugin/lokka-gravatar_image
+    url = https://github.com/nkmrshn/lokka-gravatar_image.git
+[submodule "lokka-gree_social_feedback"]
+    path = public/plugin/lokka-gree_social_feedback
+    url = git://github.com/nkmrshn/lokka-gree_social_feedback.git
+[submodule "lokka-hatena_bookmark_button"]
+    path = public/plugin/lokka-hatena_bookmark_button
+    url = https://github.com/nkmrshn/lokka-hatena_bookmark_button.git
+[submodule "lokka-mixi_check"]
+    path = public/plugin/lokka-mixi_check
+    url = git://github.com/nkmrshn/lokka-mixi_check.git
+[submodule "lokka-plusone"]
+    path = public/plugin/lokka-plusone
+    url = https://github.com/nkmrshn/lokka-plusone.git
+[submodule "lokka-tweet_button"]
+    path = public/plugin/lokka-tweet_button
+    url = git://github.com/nkmrshn/lokka-tweet_button.git
+[submodule "lokka-uploaders"]
+    path = public/plugin/lokka-uploaders
+    url = https://github.com/nkmrshn/lokka-uploaders.git
