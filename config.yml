@@ -1,5 +1,5 @@
 production:
-  dsn: <%= ENV['DATABASE_URL'] || ENV['DUOSTACK_DB_MYSQL'] %>
+  dsn: postgres:///lokka
 development:
   dsn: sqlite3://<%= root %>/db/development.sqlite3
 test:
