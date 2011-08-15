@@ -1,6 +1,7 @@
 %article.article
   %section.entry
     %h2.entry_title
+      %img{:src => gravatar_image_url(post.user.email)}
       = link_to post.title, post.link
     %section.entry_body
       = post.body
@@ -9,3 +10,13 @@
       = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
     %span.entry_date
       = post.updated_at.strftime("%Y/%m/%d %H:%M:%S")
+    %span.entry_tweet
+      = tweet_button(post.link)
+    %span.entry_facebook
+      = facebook_like_button
+    %span.entry_gree
+      = gree_social_feedback
+    %span.entry_hatena
+      = hatena_bookmark_button(post.title, post.link)
+    %span.entry_mixi
+      = mixi_check
