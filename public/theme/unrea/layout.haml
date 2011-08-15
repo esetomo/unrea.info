@@ -23,7 +23,11 @@
             %li{:class => request_path == page.link ? 'current' : ''}
               = link_to page.title, page.link
     %section#main
-      = yield
+      %section#content
+        = yield
+      %aside#sidebar
+        = partial 'twitter'
+        = partial 'nicovideo'
     %footer#footer
       Copyright 2011 &copy 
       = @site.title

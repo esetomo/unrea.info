@@ -1,3 +1,5 @@
+@import "compass/css3/gradient"
+
 body
   margin: 0
   color: #ffffff
@@ -39,12 +41,31 @@ body
         color: #ffffff
 
 #main
+  padding: 20px
   color: #000000
-  background: #ffc2ce
-  background: -moz-linear-gradient(top, #ff9daf, #ffe9ed)
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff9daf), to(#ffe9ed))
+  +linear-gradient(colors(#ff9daf, #ffe9ed))
   overflow: hidden
+
+#content
+  width: 100%
+  float: left
+  margin-right: -320px
+
+#sidebar
+  width: 320px
+  float: left
 
 #footer
   text-align: center
   padding: 2px
+
+iframe
+  margin-top: 20px
+
+h2.entry_title
+  color: #ffffff
+  background-color: #ec5050
+  margin-right: 340px
+  margin-top: 0
+  margin-bottom: 0
+  margin-left: 0

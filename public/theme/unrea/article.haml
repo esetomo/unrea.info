@@ -1,0 +1,11 @@
+%article.article
+  %section.entry
+    %h2.entry_title
+      = link_to post.title, post.link
+    %section.entry_body
+      = post.body
+  %footer.entry_info
+    %span.link_to_entry_comment
+      = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
+    %span.entry_date
+      = post.updated_at.strftime("%Y/%m/%d %H:%M:%S")
