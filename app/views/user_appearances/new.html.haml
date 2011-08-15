@@ -1,9 +1,0 @@
-#main_content
-  #main_section_wrap
-    %section#main_section
-      %header
-        %h1 New Appearance
-      = form_for @appearance, :url => user_appearances_path(@user) do |f|
-        = f.submit
-  = render :partial => 'users/sidebar'
-
