@@ -63,6 +63,7 @@ GEM
       abstract (>= 1.0.0)
     fastercsv (1.5.4)
     haml (3.1.1)
+    httpclient (2.2.1)
     i18n (0.5.0)
     json (1.4.6)
     r18n-core (0.4.9)
@@ -130,6 +131,7 @@ DEPENDENCIES
   dm-validations (= 1.1.0)
   erubis (= 2.6.6)
   haml (= 3.1.1)
+  httpclient
   i18n (= 0.5.0)
   rack-flash (= 0.1.1)
   rack-test (= 0.6.0)
