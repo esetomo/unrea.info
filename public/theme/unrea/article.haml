@@ -13,16 +13,16 @@
     - absolute_url = URI.join("http://unrea.info/", post.link).to_s
     %span.entry_tweet
       = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
-    %span.entry_facebook
-      = facebook_like_button(absolute_url)
-    %span.entry_plusone
-      = plusone(absolute_url)
     %span.entry_hatena
       = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
     %span.entry_mixi
       = mixi_check(absolute_url)
     %span.entry_gree
       = gree_social_feedback(absolute_url)
+    %span.entry_plusone
+      = plusone(absolute_url)
+    %span.entry_facebook
+      = facebook_like_button(absolute_url)
 
 
 
