@@ -10,7 +10,7 @@
       = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
     %span.entry_date
       = post.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
-    - absolute_url = URI.join(request.env['REQUEST_URI'], post.link).to_s
+    - absolute_url = URI.join("http://unrea.info/", post.link).to_s
     %span.entry_tweet
       = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
     %span.entry_facebook
