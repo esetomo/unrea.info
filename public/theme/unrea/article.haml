@@ -1,9 +1,9 @@
 %article.article
   %section.entry
     %h2.entry_title
-      %img{:src => gravatar_image_url(post.user.email)}
       = link_to post.title, post.link
     %section.entry_body
+      %img.gravatar{:src => gravatar_image_url(post.user.email)}
       = post.body
   %footer.entry_info
     %span.link_to_entry_comment
