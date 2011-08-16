@@ -9,14 +9,20 @@
     %span.link_to_entry_comment
       = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
     %span.entry_date
-      = post.updated_at.strftime("%Y/%m/%d %H:%M:%S")
+      = post.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
+    - absolute_url = URI.join(request.env['REQUEST_URI'], post.link).to_s
     %span.entry_tweet
-      = tweet_button(post.link)
+      = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
     %span.entry_facebook
-      = facebook_like_button
-    %span.entry_gree
-      = gree_social_feedback
+      = facebook_like_button(absolute_url)
+    %span.entry_plusone
+      = plusone(absolute_url)
     %span.entry_hatena
-      = hatena_bookmark_button(post.title, post.link)
+      = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
     %span.entry_mixi
-      = mixi_check
+      = mixi_check(absolute_url)
+    %span.entry_gree
+      = gree_social_feedback(absolute_url)
+
+
+
