@@ -5,24 +5,26 @@
     %section.entry_body
       %img.gravatar{:src => gravatar_image_url(post.user.email)}
       = post.body
-  %footer.entry_info
-    %span.link_to_entry_comment
-      = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
-    %span.entry_date
-      = post.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
-    - absolute_url = URI.join("http://unrea.info/", post.link).to_s
-    %span.entry_tweet
-      = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
-    %span.entry_hatena
-      = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
-    %span.entry_mixi
-      = mixi_check(absolute_url)
-    %span.entry_gree
-      = gree_social_feedback(absolute_url)
-    %span.entry_plusone
-      = plusone(absolute_url)
-    %span.entry_facebook
-      = facebook_like_button(absolute_url)
+  %footer.entry_footer
+    .entry_info    
+      %span.link_to_entry_comment
+        = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
+      %span.entry_date
+        = post.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
+    .entry_social
+      - absolute_url = URI.join("http://unrea.info/", post.link).to_s
+      .entry_tweet
+        = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
+      .entry_hatena
+        = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
+      .entry_mixi
+        = mixi_check(absolute_url)
+      .entry_gree
+        = gree_social_feedback(absolute_url)
+      .entry_plusone
+        = plusone(absolute_url)
+      .entry_facebook
+        = facebook_like_button(absolute_url)
 
 
 
