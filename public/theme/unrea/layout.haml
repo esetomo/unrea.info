@@ -27,12 +27,14 @@
       %section#content
         = yield
       %aside#sidebar
-        = partial 'twitter'
-        = partial 'nicovideo'
+        - unless request.secure?
+          = partial 'twitter'
+        - unless request.secure?
+          = partial 'nicovideo'
     %footer#footer
       Copyright 2011 &copy 
       = @site.title
       All Rights Reserved - Powered by 
       = link_to "Lokka", "http://lokka.org/" 
-    %script(type="text/javascript" src="http://apis.google.com/js/plusone.js")
+    %script(type="text/javascript" src="#{request.secure? ? 'https' : 'http' }://apis.google.com/js/plusone.js")
       {lang:'ja'}
