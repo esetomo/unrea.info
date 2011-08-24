@@ -16,8 +16,8 @@ end
 desc 'Execute seed script'
 task 'db:seed' do
   puts 'Initializing Database...'
-  DataMapper::Logger.new(STDOUT, :debug)
-  DataMapper.logger.set_log STDERR, :debug, "SQL: ", true
+  # DataMapper::Logger.new(STDOUT, :debug)
+  # DataMapper.logger.set_log STDERR, :debug, "SQL: ", true
   Lokka::Database.new.connect.seed
 end
 
