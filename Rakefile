@@ -77,8 +77,21 @@ def check_page(agent, uri)
 end
 
 task :checklinks do
+  port = rand(10000) + 10000
+
+  Thread.new do
+    Lokka::App.run! :port => port
+  end
+
   agent = Mechanize.new
-  top_url = URI.parse(ENV['TOP_URL'] || 'http://localhost:9646/')
+  top_url = URI.parse("http://localhost:#{port}/")
+
+  begin
+    agent.get(top_url)
+  rescue Net::HTTP::Persistent::Error
+    sleep 1
+    retry
+  end
 
   check_page(agent, top_url)
 end
