@@ -1,24 +1,24 @@
 %article.article
   %section.entry
     %h2.entry_title
-      = link_to post.title, post.link
+      = link_to entry.title, entry.link
     %section.entry_body
-      %img.gravatar{:src => gravatar_image_url(post.user.email)}
-      = post.body
+      %img.gravatar{:src => gravatar_image_url(entry.user.email)}
+      = entry.body
   %footer.entry_footer
     .entry_info    
       %span.link_to_entry_comment
-        = link_to "#{t.comments}(#{post.comments.size})", "#{post.link}#comment_wrapper"
+        = link_to "#{t.comments}(#{entry.comments.size})", "#{entry.link}#comment_wrapper"
       %span.entry_date
-        = post.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
+        = entry.updated_at.strftime("%Y/%m/%d %H:%M:%S") 
     .entry_social
-      - absolute_url = URI.join("http://unrea.info/", post.link).to_s
+      - absolute_url = URI.join("http://unrea.info/", entry.link).to_s
       .entry_tweet
         - unless request.secure?
-          = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
+          = tweet_button(absolute_url, "#{entry.title} - #{@site.title}")
       .entry_hatena
         - unless request.secure?
-          = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
+          = hatena_bookmark_button("#{entry.title} - #{@site.title}", absolute_url)
       .entry_mixi
         - unless request.secure?
           = mixi_check(absolute_url)

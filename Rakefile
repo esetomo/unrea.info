@@ -1,6 +1,7 @@
+# -*- Ruby -*-
 require './init'
 
-task :default => [:spec]
+task :default => [:spec, :checklinks]
 
 desc 'Prepare test'
 task 'test:prepare' => 'db:migrate' do
@@ -48,4 +49,36 @@ begin
     spec.rspec_opts = ['-cfs']
   end
 rescue LoadError => e
+end
+
+require 'mechanize'
+
+def check_page(agent, uri)
+  print uri, "\n"
+
+  page = agent.get(uri)
+  case page
+  when Mechanize::Page
+    page.links.each do |link|
+      link_uri = uri + link.uri
+      link_uri.fragment = nil
+      
+      case link_uri
+      when URI::HTTP
+        unless agent.history.visited?(link_uri)
+          case link_uri.host      
+          when uri.host
+            check_page(agent, link_uri)
+          end
+        end
+      end
+    end
+  end
+end
+
+task :checklinks do
+  agent = Mechanize.new
+  top_url = URI.parse(ENV['TOP_URL'] || 'http://localhost:9646/')
+
+  check_page(agent, top_url)
 end
