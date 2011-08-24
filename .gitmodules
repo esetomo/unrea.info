@@ -21,7 +21,7 @@
     url = https://github.com/nkmrshn/lokka-plusone.git
 [submodule "lokka-tweet_button"]
     path = public/plugin/lokka-tweet_button
-    url = git@github.com:esetomo/lokka-tweet_button.git
+    url = https://github.com/esetomo/lokka-tweet_button.git
 [submodule "lokka-uploaders"]
     path = public/plugin/lokka-uploaders
     url = https://github.com/nkmrshn/lokka-uploaders.git
