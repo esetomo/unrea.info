@@ -7,6 +7,7 @@
       %title== #{@site.title}
     %meta(name="description" content="#{@site.meta_descriptyon}")
     %meta(name="keywords" content="#{@site.meta_keywords}")
+    %link(rel="shortcut icon" href="#{@theme.path}/favicon.ico")
     %link{:title => @site.title, :rel => 'alternate', :href => '/index.atom', :type => 'application/atom+xml'}
     %link{:rel => 'stylesheet', :href => "#{@theme.path}/style.css", :type => 'text/css'}
     = header
@@ -26,12 +27,14 @@
       %section#content
         = yield
       %aside#sidebar
-        = partial 'twitter'
-        = partial 'nicovideo'
+        - unless request.secure?
+          = partial 'twitter'
+        - unless request.secure?
+          = partial 'nicovideo'
     %footer#footer
       Copyright 2011 &copy 
       = @site.title
       All Rights Reserved - Powered by 
       = link_to "Lokka", "http://lokka.org/" 
-    %script(type="text/javascript" src="http://apis.google.com/js/plusone.js")
+    %script(type="text/javascript" src="#{request.secure? ? 'https' : 'http' }://apis.google.com/js/plusone.js")
       {lang:'ja'}

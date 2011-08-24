@@ -14,17 +14,22 @@
     .entry_social
       - absolute_url = URI.join("http://unrea.info/", post.link).to_s
       .entry_tweet
-        = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
+        - unless request.secure?
+          = tweet_button(absolute_url, "#{post.title} - #{@site.title}")
       .entry_hatena
-        = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
+        - unless request.secure?
+          = hatena_bookmark_button("#{post.title} - #{@site.title}", absolute_url)
       .entry_mixi
-        = mixi_check(absolute_url)
+        - unless request.secure?
+          = mixi_check(absolute_url)
       .entry_gree
-        = gree_social_feedback(absolute_url)
+        - unless request.secure?
+          = gree_social_feedback(absolute_url)
       .entry_plusone
         = plusone(absolute_url)
       .entry_facebook
-        = facebook_like_button(absolute_url)
+        - unless request.secure?
+          = facebook_like_button(absolute_url)
 
 
 
